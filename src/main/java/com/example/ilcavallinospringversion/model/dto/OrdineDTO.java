@@ -1,4 +1,4 @@
 package com.example.ilcavallinospringversion.model.dto;
 
-public class PiattoDTO {
+public class OrdineDTO {
 }

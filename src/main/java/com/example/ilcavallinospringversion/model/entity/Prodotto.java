@@ -6,29 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="piatti")
-public class Piatto {
+@Table(name="prodotti")
+public class Prodotto {
 
     @Id
     @GeneratedValue
     private long id;
-
-
     private String nome;
+    @Enumerated(EnumType.STRING)
+    private CategoriaProdotto categoriaProdotto;
+    private String descrizione;
     private double prezzo;
-
     @OneToMany
     private List<Ingrediente> ingredienti = new ArrayList<>();
+    private String urlImg;
 
-    public Piatto(){
+    public Prodotto(){
     }
 
-    public Piatto(String nome, List<Ingrediente> ingredienti){
+    public Prodotto(String nome, List<Ingrediente> ingredienti){
         this.nome=nome;
-        this.prezzo
         this.ingredienti=ingredienti;
     }
-
+    //--------//
+    // GETTER //
+    //--------//
     public long getId(){
         return id;
     }
@@ -41,6 +43,25 @@ public class Piatto {
         return ingredienti;
     }
 
+    public CategoriaProdotto getCategoriaProdotto(){
+        return categoriaProdotto;
+    }
+
+    public String getDescrizione(){
+        return descrizione;
+    }
+
+    public double getPrezzo(){
+        return prezzo;
+    }
+
+    public String getUrlImg(){
+        return urlImg;
+    }
+
+    //--------//
+    // SETTER //
+    //--------//
     public void setId(long id){
         this.id=id;
     }

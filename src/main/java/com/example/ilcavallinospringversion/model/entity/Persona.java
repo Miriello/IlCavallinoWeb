@@ -16,7 +16,7 @@ public class Persona {
     private String cognome;
     private Ruolo ruolo;
 
-    //Obbligatorio costruttore vuoto senza parametri per JPA.
+
     public Persona(){
 
     }

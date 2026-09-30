@@ -47,7 +47,7 @@ public class Ingrediente {
             return new ArrayList<>(allergeni);
         }
 
-        public int getId(){
+        public long getId(){
             return id;
         }
 
