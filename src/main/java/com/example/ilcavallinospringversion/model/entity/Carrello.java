@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Map;
 
 @Entity
+@Table(name="carrello")
 public class Carrello {
 
     @Id

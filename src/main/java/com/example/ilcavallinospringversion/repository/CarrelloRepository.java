@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface CarrelloRepository extends JpaRepository<Carrello, Long> {
 
     Carrello findById(long id);
-
-    void delete(long id);
+    void clear(long id);
 }

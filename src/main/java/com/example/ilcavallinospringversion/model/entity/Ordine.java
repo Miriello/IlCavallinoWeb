@@ -1,11 +1,13 @@
 package com.example.ilcavallinospringversion.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Entity
+@Table(name="ordini")
 public class Ordine {
 
     private List<Prodotto> prodottiOrdine;

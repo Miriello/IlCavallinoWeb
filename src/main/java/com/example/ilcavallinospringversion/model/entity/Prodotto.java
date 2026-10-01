@@ -28,9 +28,7 @@ public class Prodotto {
         this.nome=nome;
         this.ingredienti=ingredienti;
     }
-    //--------//
-    // GETTER //
-    //--------//
+
     public long getId(){
         return id;
     }
@@ -59,9 +57,6 @@ public class Prodotto {
         return urlImg;
     }
 
-    //--------//
-    // SETTER //
-    //--------//
     public void setId(long id){
         this.id=id;
     }
@@ -72,5 +67,17 @@ public class Prodotto {
 
     public void setIngredienti(List<Ingrediente> ingredienti){
         this.ingredienti=ingredienti;
+    }
+
+    public void setCategoriaProdotto(CategoriaProdotto categoriaProdotto){
+        this.categoriaProdotto=categoriaProdotto;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void setPrezzo(double prezzo){
+        this.prezzo=prezzo;
     }
 }

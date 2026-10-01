@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarrelloService {
 
-    private static CarrelloRepository carrelloRepository;
+    private final CarrelloRepository carrelloRepository;
 
     public CarrelloService(CarrelloRepository carrelloRepository){
         this.carrelloRepository= carrelloRepository;
     }
 
-    public static void svuotaCarrello(long id){
-        carrelloRepository.delete(id);
+    public void svuotaCarrello(long id){
+        carrelloRepository.clear(id);
     }
 }

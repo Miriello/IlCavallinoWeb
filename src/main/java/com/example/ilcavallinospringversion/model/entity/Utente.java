@@ -1,6 +1,5 @@
 package com.example.ilcavallinospringversion.model.entity;
 
-import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
