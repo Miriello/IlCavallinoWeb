@@ -20,7 +20,7 @@ public class ProdottoService {
 
     @Transactional
     public ProdottoDTO getProdotto (long id){
-        return toDTO(prodottoRepository.findById(id));
+        return toDTO(prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato")));
     }
 
     @Transactional

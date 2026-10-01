@@ -16,19 +16,25 @@ public class Ordine {
     @Id
     @GeneratedValue
     private long id;
+    private Utente utente;
     private LocalDate data;
     private List<Prodotto> prodottiOrdine;
 
     public Ordine(){
 
     }
-    public Ordine(long id, LocalDate data, List<Prodotto> prodottiOrdine){
+    public Ordine(long id, Utente utente, LocalDate data, List<Prodotto> prodottiOrdine){
         this.id=id;
+        this.utente=utente;
         this.data=data;
         this.prodottiOrdine=prodottiOrdine;
     }
     public long getId(){
         return id;
+    }
+
+    public Utente getUtente(){
+        return utente;
     }
 
     public LocalDate getData(){
@@ -46,6 +52,10 @@ public class Ordine {
     }
     public void setId(long id){
         this.id=id;
+    }
+
+    public void setUtente(Utente utente){
+        this.utente=utente;
     }
 
     public void setData(LocalDate data){
