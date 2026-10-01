@@ -4,7 +4,6 @@ import com.example.ilcavallinospringversion.model.entity.Prodotto;
 import com.example.ilcavallinospringversion.model.responseDTO.ProdottoDTO;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -72,6 +71,6 @@ public class ProdottoService {
 
     @Transactional
     public void eliminaProdotto(long id){
-        prodottoRepository.delete(id);
+        prodottoRepository.deleteById(id);
     }
 }

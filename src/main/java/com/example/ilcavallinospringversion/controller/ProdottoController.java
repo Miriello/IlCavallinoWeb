@@ -38,8 +38,8 @@ public class ProdottoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('CUCINA','SOCIO','ADMIN')")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<ProdottoDTO> aggiornaProdotto(@PathVariable long id , @RequestBody ProdottoDTO prodottoDTO){
         ProdottoDTO nuovo = prodottoService.aggiornaProdotto(id, prodottoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);

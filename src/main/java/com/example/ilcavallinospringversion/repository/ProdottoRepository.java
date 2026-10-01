@@ -1,16 +1,17 @@
 package com.example.ilcavallinospringversion.repository;
 
 import com.example.ilcavallinospringversion.model.entity.Prodotto;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ProdottoRepository {
+public interface ProdottoRepository extends JpaRepository<Prodotto,Long>{
     Prodotto findById(long id);
     List<Prodotto> findAll();
-    Prodotto save(Prodotto p);
-    Prodotto upload(long id, Prodotto p);
-    void delete(long id);
+    Prodotto save(Prodotto prodotto);
+    Prodotto upload(long id, Prodotto prodotto);
+    void deleteById(long id);
 
 }
