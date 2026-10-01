@@ -22,12 +22,36 @@ public class Carrello {
 
     }
 
+    public long getId(){
+        return id;
+    }
+
+    public Map<Prodotto,Integer> getProdotti(){
+        return prodotti;
+    }
+
+    private Utente getUtente(){
+        return utente;
+    }
+
     public double getTotale(){
         double totale = 0.0;
         for(Map.Entry<Prodotto, Integer> p : prodotti.entrySet()){
             totale += (p.getKey().getPrezzo() * p.getValue());
         }
         return totale;
+    }
+
+    public void setId(long id){
+        this.id=id;
+    }
+
+    public void setProdotti(Map<Prodotto,Integer> prodotti){
+        this.prodotti=prodotti;
+    }
+
+    public void setUtente(Utente utente){
+        this.utente=utente;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.ilcavallinospringversion.model.entity;
 
+import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -66,6 +67,15 @@ public class Utente implements UserDetails {
         return id;
     }
 
+    public Carrello getCarrello(){
+        return carrello;
+    }
+
+
+    public void setId(long id){
+        this.id=id;
+    }
+
     public void setUsername(String username){
         this.username=username;
     }
@@ -74,11 +84,15 @@ public class Utente implements UserDetails {
         this.password=password;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email=email;
     }
 
     public void setRuolo(Ruolo ruolo){
         this.ruolo=ruolo;
+    }
+
+    public void setCarrello(Carrello carrello){
+        this.carrello=carrello;
     }
 }
