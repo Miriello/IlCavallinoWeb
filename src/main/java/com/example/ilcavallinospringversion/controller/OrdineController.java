@@ -1,6 +1,6 @@
 package com.example.ilcavallinospringversion.controller;
 
-import com.example.ilcavallinospringversion.model.responseDTO.OrdineDTO;
+import com.example.ilcavallinospringversion.model.dto.OrdineDTO;
 import com.example.ilcavallinospringversion.service.OrdineService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,4 +51,5 @@ public class OrdineController {
         ordineService.eliminaOrdine(id);
         return ResponseEntity.noContent().build();
     }
+
 }

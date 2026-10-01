@@ -1,6 +1,6 @@
 package com.example.ilcavallinospringversion.controller;
 
-import com.example.ilcavallinospringversion.model.responseDTO.ProdottoDTO;
+import com.example.ilcavallinospringversion.model.dto.ProdottoDTO;
 import com.example.ilcavallinospringversion.service.ProdottoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

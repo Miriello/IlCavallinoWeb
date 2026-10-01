@@ -1,6 +1,5 @@
-package com.example.ilcavallinospringversion.model.responseDTO;
+package com.example.ilcavallinospringversion.model.dto;
 
-import com.example.ilcavallinospringversion.model.entity.Ordine;
 import com.example.ilcavallinospringversion.model.entity.Prodotto;
 
 import java.time.LocalDate;

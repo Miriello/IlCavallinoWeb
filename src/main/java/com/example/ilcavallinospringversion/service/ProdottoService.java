@@ -1,7 +1,7 @@
 package com.example.ilcavallinospringversion.service;
 
 import com.example.ilcavallinospringversion.model.entity.Prodotto;
-import com.example.ilcavallinospringversion.model.responseDTO.ProdottoDTO;
+import com.example.ilcavallinospringversion.model.dto.ProdottoDTO;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IlCavallinoSpringVersionApplication {
+public class IlCavallinoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IlCavallinoSpringVersionApplication.class, args);
+        SpringApplication.run(IlCavallinoApplication.class, args);
     }
 
 }

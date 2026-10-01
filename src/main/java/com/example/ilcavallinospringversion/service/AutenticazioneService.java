@@ -1,7 +1,7 @@
 package com.example.ilcavallinospringversion.service;
 
-import com.example.ilcavallinospringversion.model.requestDTO.LoginRequest;
-import com.example.ilcavallinospringversion.model.requestDTO.RegistrazioneRequest;
+import com.example.ilcavallinospringversion.model.dto.LoginRequest;
+import com.example.ilcavallinospringversion.model.dto.RegistrazioneRequest;
 import com.example.ilcavallinospringversion.repository.UtenteRepository;
 import org.springframework.stereotype.Service;
 

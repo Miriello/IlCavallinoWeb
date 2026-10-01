@@ -1,10 +1,9 @@
 package com.example.ilcavallinospringversion.service;
 
 import com.example.ilcavallinospringversion.model.entity.Ordine;
-import com.example.ilcavallinospringversion.model.responseDTO.OrdineDTO;
+import com.example.ilcavallinospringversion.model.dto.OrdineDTO;
 import com.example.ilcavallinospringversion.repository.OrdineRepository;
 import jakarta.transaction.Transactional;
-import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class OrdineService {
 
     public Ordine toEntity(OrdineDTO ordineDTO){
         Ordine ordine = new Ordine();
-        ordine.setId(ordineDTO.getId());
         ordine.setData(ordineDTO.getData());
         ordine.setProdottiOrdine(ordineDTO.getProdottiOrdine());
         return ordine;
