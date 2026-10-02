@@ -11,4 +11,8 @@ public class CarrelloDTO {
     public CarrelloDTO(Map<Prodotto, Integer> carrello){
 
     }
+
+    public CarrelloDTO() {
+
+    }
 }

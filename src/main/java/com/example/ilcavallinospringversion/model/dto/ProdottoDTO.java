@@ -6,7 +6,6 @@ import java.util.List;
 
 public class ProdottoDTO {
 
-
     private long id;
     private String nome;
     private CategoriaProdotto categoriaProdotto;
@@ -14,6 +13,7 @@ public class ProdottoDTO {
     private double prezzo;
     private List<Ingrediente> ingredienti;
     private String urlImg;
+
 
     public ProdottoDTO(long id, String nome, CategoriaProdotto categoriaProdotto, String descrizione, double prezzo, List<Ingrediente> ingredienti, String urlImg){
         this.id=id;
