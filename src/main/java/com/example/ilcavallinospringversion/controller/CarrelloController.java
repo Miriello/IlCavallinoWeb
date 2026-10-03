@@ -19,21 +19,25 @@ public class CarrelloController {
         this.utenteService=utenteService;
     }
     @RequestMapping
-    public void getCarrello(@AuthenticationPrincipal Utente utente){
-        carrelloService.trovaCarrello(utente);
+    public ResponseEntity<CarrelloDTO> getCarrello(@AuthenticationPrincipal Utente utente){
+        CarrelloDTO carrello = carrelloService.trovaCarrello(utente);
+        return ResponseEntity.ok(carrello);
     }
 
     @PostMapping
-    public void aggiungiAlCarrello(@AuthenticationPrincipal Utente utente, long idProdotto, int quantita) {
-        carrelloService.aggiungiAlCarrello(utente, idProdotto, quantita);
+    public ResponseEntity<CarrelloDTO> aggiungiAlCarrello(@AuthenticationPrincipal Utente utente, long idProdotto, int quantita) {
+        CarrelloDTO carrello =  carrelloService.aggiungiAlCarrello(utente, idProdotto, quantita);
+        return ResponseEntity.ok(carrello);
     }
 
     @DeleteMapping
-    public void rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, long idProdotto){
-        carrelloService.rimuoviProdotto(utente, idProdotto);
+    public ResponseEntity<CarrelloDTO> rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, long idProdotto){
+        CarrelloDTO carrello = carrelloService.rimuoviProdotto(utente, idProdotto);
+        return ResponseEntity.ok(carrello);
     }
-
+    @DeleteMapping
     public ResponseEntity<CarrelloDTO> svuotaCarrello(@AuthenticationPrincipal Utente utente){
-       return carrelloService.svuotaCarrello(utente);
+        CarrelloDTO carrello = carrelloService.svuotaCarrello(utente);
+        return ResponseEntity.ok(carrello);
     }
 }

@@ -7,9 +7,11 @@ import com.example.ilcavallinospringversion.model.entity.Utente;
 import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
 import com.example.ilcavallinospringversion.utility.RigaCarrello;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -23,16 +25,12 @@ public class CarrelloService {
         this.prodottoRepository=prodottoRepository;
     }
 
+    @Transactional
     public CarrelloDTO trovaCarrello(Utente utente){
        return toDTO(carrelloRepository.findByUtente(utente));
     }
 
-    public CarrelloDTO svuotaCarrello(long idCarrello){
-        CarrelloDTO c = new CarrelloDTO();
-        carrelloRepository.delete(carrelloRepository.findById(idCarrello));
-        return c;
-    }
-
+    @Transactional
     public CarrelloDTO aggiungiAlCarrello(Utente utente, long idProdotto, int unita){
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
         CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
@@ -47,7 +45,7 @@ public class CarrelloService {
         return nuovoDTO;
     }
 
-
+    @Transactional
     public CarrelloDTO rimuoviProdotto(Utente utente, long idProdotto){
         CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
@@ -60,12 +58,11 @@ public class CarrelloService {
             return carrelloDTO;
         }
     }
-
+    @Transactional
     public CarrelloDTO svuotaCarrello(Utente utente){
-        CarrelloDTO nuovo = new CarrelloDTO();
-        nuovo.setUtente(utente);
-        carrelloRepository.save(toEntity(nuovo));
-        return nuovo;
+        CarrelloDTO carrelloDTO= toDTO(carrelloRepository.findByUtente(utente));
+        carrelloDTO.setElenco(new ArrayList<>());
+        return toDTO(carrelloRepository.save(toEntity(carrelloDTO)));
     }
 
     public Carrello toEntity(CarrelloDTO carrelloDTO){

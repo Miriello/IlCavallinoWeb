@@ -3,6 +3,7 @@ package com.example.ilcavallinospringversion.model.entity;
 import com.example.ilcavallinospringversion.utility.RigaCarrello;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class Carrello {
     @Id
     @GeneratedValue
     private long id;
-    private List<RigaCarrello> elenco;
+    private List<RigaCarrello> elenco = new ArrayList<>();
     @OneToOne(optional = false)
     @JoinColumn(name="utente_id", nullable = false, unique = true)
     private Utente utente;
@@ -55,16 +56,17 @@ public class Carrello {
     public void rimuoviRiga(Prodotto p){
         int indice = 0;
         for(RigaCarrello rg : elenco){
-            indice++;
-            if(rg.getProdotto() == p){
+            if(rg.getProdotto().getId() == p.getId()){
                 rimuoviRiga(indice);
+                break;
             }
+            indice++;
         }
     }
 
     public boolean prodottoPresente(Prodotto prodotto){
         for(RigaCarrello rg : elenco){
-            if(rg.getProdotto() == prodotto){
+            if(rg.getProdotto().getId() == prodotto.getId()){
                 return true;
             }
         }
@@ -80,7 +82,7 @@ public class Carrello {
         }
         else {
             for (RigaCarrello rg : elenco) {
-                if (rg.getProdotto() == prodotto) {
+                if (rg.getProdotto().getId() == prodotto.getId()) {
                     rg.setUnita(nuovaQuantita);
                 }
             }
@@ -92,7 +94,7 @@ public class Carrello {
             throw new IllegalArgumentException("Il prezzo non può essere negativo");
         }
         for(RigaCarrello rg: elenco){
-            if(rg.getProdotto()== prodotto){
+            if(rg.getProdotto().getId()== prodotto.getId()){
                 rg.setPrezzo(nuovoPrezzo);
             }
         }
@@ -100,7 +102,7 @@ public class Carrello {
 
     public int getQuantitaProdotto(Prodotto prodotto){
         for(RigaCarrello rg: elenco){
-            if(rg.getProdotto()==prodotto){
+            if(rg.getProdotto().getId()==prodotto.getId()){
                 return rg.getUnita();
             }
         }
@@ -112,7 +114,7 @@ public class Carrello {
         this.id=id;
     }
 
-    public void setElenco(List<RigaCarrello> Elenco){
+    public void setElenco(List<RigaCarrello> elenco){
         this.elenco=elenco;
     }
 
