@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdottoRepository extends JpaRepository<Prodotto,Long>{
-    Prodotto upload(long id, Prodotto p);
+
 }

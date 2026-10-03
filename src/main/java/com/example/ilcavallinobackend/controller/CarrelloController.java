@@ -31,7 +31,7 @@ public class CarrelloController {
     }
 
     @DeleteMapping("/elimina/{idProdotto}")
-    public ResponseEntity<CarrelloDTO> rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, long idProdotto){
+    public ResponseEntity<CarrelloDTO> rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, @PathVariable long idProdotto){
         CarrelloDTO carrello = carrelloService.rimuoviProdotto(utente, idProdotto);
         return ResponseEntity.ok(carrello);
     }

@@ -12,6 +12,7 @@ public class Carrello {
     @Id
     @GeneratedValue
     private long id;
+    @OneToMany
     private List<RigaCarrello> elenco = new ArrayList<>();
     @OneToOne(optional = false)
     @JoinColumn(name="utente_id", nullable = false, unique = true)

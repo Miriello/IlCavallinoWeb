@@ -11,5 +11,4 @@ import java.util.List;
 public interface OrdineRepository extends JpaRepository<Ordine,Long> {
     List<Ordine> findByUtente(Utente utente);
     List<Ordine> findByData(LocalDate data);
-    Ordine upload(long id, Ordine ordine);
 }

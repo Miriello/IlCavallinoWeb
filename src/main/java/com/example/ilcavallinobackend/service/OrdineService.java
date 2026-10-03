@@ -53,6 +53,9 @@ public class OrdineService {
     public OrdineDTO toDTO (Ordine ordine){
         OrdineDTO ordineDTO = new OrdineDTO();
         ordineDTO.setId(ordine.getId());
+        ordineDTO.setUsername(ordine.getUtente().getUsername());
+        ordineDTO.setData(ordine.getData());
+        ordineDTO.setCarrello(ordine.getCarrello());
         return ordineDTO;
     }
 

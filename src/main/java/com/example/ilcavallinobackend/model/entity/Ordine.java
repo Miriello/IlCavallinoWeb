@@ -1,9 +1,6 @@
 package com.example.ilcavallinobackend.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +10,7 @@ public class Ordine {
     @Id
     @GeneratedValue
     private long id;
+    @ManyToOne
     private Utente utente;
     private LocalDate data;
     private Carrello carrello;

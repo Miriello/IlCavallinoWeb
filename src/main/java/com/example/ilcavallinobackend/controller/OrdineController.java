@@ -27,7 +27,7 @@ public class OrdineController {
         return ResponseEntity.ok(ordini);
     }
 
-    @GetMapping
+    @GetMapping("/miei")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<OrdineDTO>> getMieiOrdini(@AuthenticationPrincipal Utente utente){
         List<OrdineDTO> ordini = ordineService.getMieiOrdini(utente);
