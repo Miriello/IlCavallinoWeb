@@ -65,7 +65,6 @@ public class ProdottoService {
     @Transactional
     public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO){
         Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
-        prodotto.setId(prodottoDTO.getId());
         prodotto.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
         prodotto.setPrezzo(prodottoDTO.getPrezzo());
         prodotto.setDescrizione(prodottoDTO.getDescrizione());

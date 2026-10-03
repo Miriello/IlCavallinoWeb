@@ -42,7 +42,7 @@ public class ProdottoController {
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<ProdottoDTO> aggiornaProdotto(@PathVariable long id , @RequestBody ProdottoDTO prodottoDTO){
         ProdottoDTO nuovo = prodottoService.aggiornaProdotto(id, prodottoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
+        return ResponseEntity.ok(nuovo);
     }
 
     @DeleteMapping("/{id}")

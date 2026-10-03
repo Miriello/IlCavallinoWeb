@@ -8,11 +8,9 @@ import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
 import com.example.ilcavallinospringversion.utility.RigaCarrello;
 import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class CarrelloService {
@@ -69,7 +67,7 @@ public class CarrelloService {
         Carrello c = new Carrello();
         c.setId(carrelloDTO.getId());
         c.setElenco((carrelloDTO.getElenco()));
-        c.setUtente(carrelloDTO.getUtente());
+        c.setUtente(carrelloDTO.getUsername().);
         return c;
     }
 
@@ -77,7 +75,7 @@ public class CarrelloService {
         CarrelloDTO carrelloDTO = new CarrelloDTO();
         carrelloDTO.setId(carrello.getId());
         carrelloDTO.setElenco(carrello.getElenco());
-        carrelloDTO.setUtente(carrello.getUtente());
+        carrelloDTO.setUsernmane(carrello.getUsername());
         return carrelloDTO;
     }
 }

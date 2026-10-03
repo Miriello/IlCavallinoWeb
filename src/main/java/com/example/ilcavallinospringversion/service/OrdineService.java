@@ -76,7 +76,6 @@ public class OrdineService {
        Ordine ordine = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
        ordine.setData(ordineDTO.getData());
        ordine.setUtente(ordineDTO.getUtente());
-       ordine.setId(ordineDTO.getId());
        ordine.setCarrello(ordineDTO.getCarrello());
        return toDTO(ordineRepository.save(ordine));
     }

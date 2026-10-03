@@ -22,7 +22,7 @@ public class OrdineController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('SOCIO','ADMIN')")
     public ResponseEntity<List<OrdineDTO>> getOrdini(){
         List<OrdineDTO> ordini = ordineService.getOrdini();
         return ResponseEntity.ok(ordini);

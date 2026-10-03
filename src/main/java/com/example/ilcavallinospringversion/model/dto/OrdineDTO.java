@@ -1,16 +1,13 @@
 package com.example.ilcavallinospringversion.model.dto;
 
 import com.example.ilcavallinospringversion.model.entity.Carrello;
-import com.example.ilcavallinospringversion.model.entity.Prodotto;
 import com.example.ilcavallinospringversion.model.entity.Utente;
 
 import java.time.LocalDate;
-import java.util.List;
-
 public class OrdineDTO {
 
     private long id;
-    private Utente utente;
+    private String username;
     private LocalDate data;
     private Carrello carrello;
 
@@ -18,9 +15,9 @@ public class OrdineDTO {
 
     }
 
-    public OrdineDTO(long id, Utente utente, LocalDate data, Carrello carrello){
+    public OrdineDTO(long id, String username, LocalDate data, Carrello carrello){
         this.id=id;
-        this.utente=utente;
+        this.username=username;
         this.data=data;
         this.carrello=carrello;
     }
@@ -33,12 +30,12 @@ public class OrdineDTO {
         this.id = id;
     }
 
-    public Utente getUtente(){
-        return utente;
+    public String getUsername(){
+        return username;
     }
 
-    public void setUtente(Utente utente){
-        this.utente=utente;
+    public void setUsername(String username){
+        this.username=username;
     }
 
     public LocalDate getData() {

@@ -35,7 +35,10 @@ public class AllergeneService {
     }
     @Transactional
     public AllergeneDTO aggiornaAllergene(long id, AllergeneDTO allergeneDTO){
-        return toDTO(allergeneRepository.uploadById(id, toEntity(allergeneDTO)));
+        Allergene allergene = allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));
+        allergene.setNome(allergeneDTO.getNome());
+        allergene.setId(allergeneDTO.getId());
+        return toDTO(allergeneRepository.save(allergene));
     }
 
     @Transactional

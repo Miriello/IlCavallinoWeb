@@ -18,7 +18,7 @@ public class CarrelloController {
         this.carrelloService=carrelloService;
         this.utenteService=utenteService;
     }
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<CarrelloDTO> getCarrello(@AuthenticationPrincipal Utente utente){
         CarrelloDTO carrello = carrelloService.trovaCarrello(utente);
         return ResponseEntity.ok(carrello);
@@ -30,12 +30,12 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<CarrelloDTO> rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, long idProdotto){
         CarrelloDTO carrello = carrelloService.rimuoviProdotto(utente, idProdotto);
         return ResponseEntity.ok(carrello);
     }
-    @DeleteMapping
+    @DeleteMapping("/svuota")
     public ResponseEntity<CarrelloDTO> svuotaCarrello(@AuthenticationPrincipal Utente utente){
         CarrelloDTO carrello = carrelloService.svuotaCarrello(utente);
         return ResponseEntity.ok(carrello);

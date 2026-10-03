@@ -2,6 +2,7 @@ package com.example.ilcavallinospringversion.controller;
 
 import com.example.ilcavallinospringversion.model.dto.UtenteDTO;
 import com.example.ilcavallinospringversion.service.UtenteService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ public class UtenteController {
         this.utenteService=utenteService;
     }
 
-    @RequestMapping
+    @GetMapping
     public UtenteDTO getUtente(){
         return null;
     }

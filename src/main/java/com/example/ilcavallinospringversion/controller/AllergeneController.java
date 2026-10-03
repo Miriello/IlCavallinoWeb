@@ -12,18 +12,19 @@ import java.util.List;
 @RestController
 @RequestMapping("api/allergeni")
 public class AllergeneController {
+
     private final AllergeneService allergeneService;
 
     public AllergeneController(AllergeneService allergeneService){
         this.allergeneService=allergeneService;
     }
 
-    @RequestMapping
+    @GetMapping
     public ResponseEntity<List<AllergeneDTO>> getAllergeni(){
         List<AllergeneDTO> allergeni = allergeneService.getAllergeni();
         return ResponseEntity.ok(allergeni);
     }
-    @RequestMapping ("{/id}")
+    @GetMapping ("/{id}")
     public ResponseEntity<AllergeneDTO> getAllergene(@PathVariable long id){
        AllergeneDTO allergene = allergeneService.getAllergene(id);
        return ResponseEntity.ok(allergene);
@@ -32,15 +33,15 @@ public class AllergeneController {
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<AllergeneDTO> aggiungiAllergene(@RequestBody AllergeneDTO allergeneDTO){
         AllergeneDTO nuovo = allergeneService.aggiungiAllergene(allergeneDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(allergeneDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
     }
-    @PutMapping
+    @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<AllergeneDTO> aggiornaAllergene(@PathVariable long id, @RequestBody AllergeneDTO allergeneDTO ){
         AllergeneDTO modificato = allergeneService.aggiornaAllergene(id,allergeneDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(modificato);
+        return ResponseEntity.ok(modificato);
     }
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public void eliminaAllergene(@PathVariable long id){
         allergeneService.eliminaAllergene(id);

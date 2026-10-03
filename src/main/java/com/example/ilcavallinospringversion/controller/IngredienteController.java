@@ -3,6 +3,7 @@ package com.example.ilcavallinospringversion.controller;
 import com.example.ilcavallinospringversion.model.dto.IngredienteDTO;
 import com.example.ilcavallinospringversion.model.entity.Ingrediente;
 import com.example.ilcavallinospringversion.service.IngredienteService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
@@ -19,12 +20,13 @@ public class IngredienteController {
         this.ingredienteService=ingredienteService;
     }
 
+    @GetMapping
     public ResponseEntity<List<IngredienteDTO>> getIngredienti(){
         List<IngredienteDTO> ingredienti = ingredienteService.getIngredienti();
         return ResponseEntity.ok(ingredienti);
 
     }
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<IngredienteDTO> getIngrediente(@PathVariable long id){
         IngredienteDTO ingrediente= ingredienteService.getIngrediente(id);
@@ -34,7 +36,7 @@ public class IngredienteController {
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public  ResponseEntity<IngredienteDTO> aggiungiIngrediente(@RequestBody IngredienteDTO ingredienteDTO){
         IngredienteDTO nuovo= ingredienteService.aggiungiIngrediente(ingredienteDTO);
-        return ResponseEntity.ok(nuovo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
 
     }
     @PutMapping
