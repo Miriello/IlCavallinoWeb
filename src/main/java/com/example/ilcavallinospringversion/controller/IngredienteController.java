@@ -39,13 +39,13 @@ public class IngredienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
 
     }
-    @PutMapping
+    @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public  ResponseEntity<IngredienteDTO> aggiornaIngrediente(@PathVariable long id, @RequestBody IngredienteDTO ingredienteDTO){
         IngredienteDTO modificato = ingredienteService.aggiornaIngrediente(id, ingredienteDTO);
         return ResponseEntity.ok(modificato);
     }
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public void eliminaIngrediente(@PathVariable long id){
         ingredienteService.eliminaIngrediente(id);

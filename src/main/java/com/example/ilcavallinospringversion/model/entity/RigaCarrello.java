@@ -1,7 +1,8 @@
-package com.example.ilcavallinospringversion.utility;
+package com.example.ilcavallinospringversion.model.entity;
 
-import com.example.ilcavallinospringversion.model.entity.Prodotto;
+import jakarta.persistence.Entity;
 
+@Entity
 public class RigaCarrello {
 
     private Prodotto prodotto;

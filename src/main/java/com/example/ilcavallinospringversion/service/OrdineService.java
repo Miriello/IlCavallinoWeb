@@ -56,15 +56,9 @@ public class OrdineService {
         return ordineDTO;
     }
 
-    public Ordine toEntity(OrdineDTO ordineDTO){
-        Ordine ordine = new Ordine();
-        ordine.setData(ordineDTO.getData());
-        ordine.setCarrello(ordineDTO.getUtente().getCarrello());
-        return ordine;
-    }
     @Transactional
     public OrdineDTO creaOrdine(Utente utente){
-        Carrello carrello = carrelloRepository.findByUtente(utente);
+        Carrello carrello = carrelloRepository.attivaLock(utente);
         Ordine nuovo = new Ordine();
         nuovo.setCarrello(carrello);
         nuovo.setData(LocalDate.now());
@@ -75,7 +69,6 @@ public class OrdineService {
     public OrdineDTO aggiornaOrdine(long id, OrdineDTO ordineDTO){
        Ordine ordine = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
        ordine.setData(ordineDTO.getData());
-       ordine.setUtente(ordineDTO.getUtente());
        ordine.setCarrello(ordineDTO.getCarrello());
        return toDTO(ordineRepository.save(ordine));
     }

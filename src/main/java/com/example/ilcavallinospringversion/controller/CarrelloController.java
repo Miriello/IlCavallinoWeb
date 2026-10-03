@@ -30,7 +30,7 @@ public class CarrelloController {
         return ResponseEntity.ok(carrello);
     }
 
-    @DeleteMapping("/elimina/{id}")
+    @DeleteMapping("/elimina/{idProdotto}")
     public ResponseEntity<CarrelloDTO> rimuoviDalCarrello(@AuthenticationPrincipal Utente utente, long idProdotto){
         CarrelloDTO carrello = carrelloService.rimuoviProdotto(utente, idProdotto);
         return ResponseEntity.ok(carrello);

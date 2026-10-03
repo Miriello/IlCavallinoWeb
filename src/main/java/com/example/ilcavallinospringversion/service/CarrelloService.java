@@ -6,7 +6,7 @@ import com.example.ilcavallinospringversion.model.entity.Prodotto;
 import com.example.ilcavallinospringversion.model.entity.Utente;
 import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
-import com.example.ilcavallinospringversion.utility.RigaCarrello;
+import com.example.ilcavallinospringversion.model.entity.RigaCarrello;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -63,19 +63,12 @@ public class CarrelloService {
         return toDTO(carrelloRepository.save(carrello));
     }
 
-    public Carrello toEntity(CarrelloDTO carrelloDTO){
-        Carrello c = new Carrello();
-        c.setId(carrelloDTO.getId());
-        c.setElenco((carrelloDTO.getElenco()));
-        c.setUtente(carrelloDTO.getUsername().);
-        return c;
-    }
 
     public CarrelloDTO toDTO(Carrello carrello){
         CarrelloDTO carrelloDTO = new CarrelloDTO();
         carrelloDTO.setId(carrello.getId());
         carrelloDTO.setElenco(carrello.getElenco());
-        carrelloDTO.setUsernmane(carrello.getUsername());
+        carrelloDTO.setUsername(carrello.getUtente().getUsername());
         return carrelloDTO;
     }
 }

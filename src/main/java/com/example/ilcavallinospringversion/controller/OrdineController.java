@@ -52,7 +52,7 @@ public class OrdineController {
     @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
     public ResponseEntity<OrdineDTO> aggiornaOrdine(@PathVariable long id , @RequestBody OrdineDTO ordineDTO){
         OrdineDTO nuovo = ordineService.aggiornaOrdine(id, ordineDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
+        return ResponseEntity.ok(nuovo);
     }
 
     @DeleteMapping("/{id}")

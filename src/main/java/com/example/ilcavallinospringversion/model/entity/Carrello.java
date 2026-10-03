@@ -1,6 +1,5 @@
 package com.example.ilcavallinospringversion.model.entity;
 
-import com.example.ilcavallinospringversion.utility.RigaCarrello;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

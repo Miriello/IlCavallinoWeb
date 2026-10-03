@@ -1,8 +1,7 @@
 package com.example.ilcavallinospringversion.model.dto;
 
 
-import com.example.ilcavallinospringversion.model.entity.Utente;
-import com.example.ilcavallinospringversion.utility.RigaCarrello;
+import com.example.ilcavallinospringversion.model.entity.RigaCarrello;
 
 import java.util.List;
 
