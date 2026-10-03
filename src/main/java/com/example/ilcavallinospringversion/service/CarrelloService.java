@@ -7,6 +7,7 @@ import com.example.ilcavallinospringversion.model.entity.Utente;
 import com.example.ilcavallinospringversion.repository.CarrelloRepository;
 import com.example.ilcavallinospringversion.repository.ProdottoRepository;
 import com.example.ilcavallinospringversion.utility.RigaCarrello;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,6 +23,10 @@ public class CarrelloService {
         this.prodottoRepository=prodottoRepository;
     }
 
+    public CarrelloDTO trovaCarrello(Utente utente){
+       return toDTO(carrelloRepository.findByUtente(utente));
+    }
+
     public CarrelloDTO svuotaCarrello(long idCarrello){
         CarrelloDTO c = new CarrelloDTO();
         carrelloRepository.delete(carrelloRepository.findById(idCarrello));
@@ -30,17 +35,37 @@ public class CarrelloService {
 
     public CarrelloDTO aggiungiAlCarrello(Utente utente, long idProdotto, int unita){
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
-        double prezzo = prodotto.getPrezzo();
-        RigaCarrello rigaCarrello = new RigaCarrello(prodotto,unita,prezzo);
-        return toDTO(carrelloRepository.save(utente, rigaCarrello));
+        CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
+        if(carrelloDTO.prodottoPresente(prodotto)){
+           carrelloDTO.modificaQuantita(prodotto, carrelloDTO.getQuantitaProdotto(prodotto)+unita);
+        }
+        else{
+            carrelloDTO.aggiungiRiga(new RigaCarrello(prodotto,unita,prodotto.getPrezzo()));
+        }
+        Carrello nuovo = carrelloRepository.save(toEntity(carrelloDTO));
+        CarrelloDTO nuovoDTO = toDTO(nuovo);
+        return nuovoDTO;
     }
 
-    public CarrelloDTO aggiornaCarrello(CarrelloDTO carrelloDTO){
 
+    public CarrelloDTO rimuoviProdotto(Utente utente, long idProdotto){
+        CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
+        Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
+        if(carrelloDTO.prodottoPresente(prodotto)){
+            carrelloDTO.rimuoviRiga(prodotto);
+            CarrelloDTO modificato = toDTO(carrelloRepository.save(toEntity(carrelloDTO)));
+            return modificato;
+        }
+        else {
+            return carrelloDTO;
+        }
     }
 
-    public CarrelloDTO rimuoviDalCarrello(CarrelloDTO carrelloDTO, long idProdotto){
-        return toDTO(carrelloRepository.deleteProdottoByIdProdotto(idProdotto));
+    public CarrelloDTO svuotaCarrello(Utente utente){
+        CarrelloDTO nuovo = new CarrelloDTO();
+        nuovo.setUtente(utente);
+        carrelloRepository.save(toEntity(nuovo));
+        return nuovo;
     }
 
     public Carrello toEntity(CarrelloDTO carrelloDTO){

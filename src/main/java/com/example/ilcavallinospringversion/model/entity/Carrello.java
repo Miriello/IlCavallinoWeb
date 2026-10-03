@@ -62,6 +62,15 @@ public class Carrello {
         }
     }
 
+    public boolean prodottoPresente(Prodotto prodotto){
+        for(RigaCarrello rg : elenco){
+            if(rg.getProdotto() == prodotto){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void modificaQuantita(Prodotto prodotto, int nuovaQuantita){
         if(nuovaQuantita < 0){
             throw new IllegalArgumentException("La quantità non può essere negativa");
@@ -79,12 +88,25 @@ public class Carrello {
     }
 
     public void modificaPrezzo(Prodotto prodotto, double nuovoPrezzo){
+        if(nuovoPrezzo <= 0){
+            throw new IllegalArgumentException("Il prezzo non può essere negativo");
+        }
         for(RigaCarrello rg: elenco){
             if(rg.getProdotto()== prodotto){
                 rg.setPrezzo(nuovoPrezzo);
             }
         }
     }
+
+    public int getQuantitaProdotto(Prodotto prodotto){
+        for(RigaCarrello rg: elenco){
+            if(rg.getProdotto()==prodotto){
+                return rg.getUnita();
+            }
+        }
+        return 0;
+    }
+
 
     public void setId(long id){
         this.id=id;
