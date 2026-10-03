@@ -36,7 +36,7 @@ public class CarrelloService {
     public Carrello toEntity(CarrelloDTO carrelloDTO){
         Carrello c = new Carrello();
         c.setId(carrelloDTO.getId());
-        c.setProdotti((carrelloDTO.getProdotti()));
+        c.setProdotti((carrelloDTO.getElenco()));
         c.setUtente(carrelloDTO.getUtente());
         return c;
     }
@@ -44,7 +44,7 @@ public class CarrelloService {
     public CarrelloDTO toDTO(Carrello carrello){
         CarrelloDTO carrelloDTO = new CarrelloDTO();
         carrelloDTO.setId(carrello.getId());
-        carrelloDTO.setProdotti(carrello.getProdotti());
+        carrelloDTO.setElenco(carrello.getProdotti());
         carrelloDTO.setUtente(carrello.getUtente());
         return carrelloDTO;
     }

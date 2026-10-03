@@ -31,7 +31,7 @@ public class Carrello {
         return prodotti;
     }
 
-    private Utente getUtente(){
+    public Utente getUtente(){
         return utente;
     }
 
