@@ -28,11 +28,7 @@ public class Ingrediente {
             this.id=id;
         }
 
-        public Ingrediente(Ingrediente i) {
-            this.nome = i.nome;
-            this.scadenza = i.scadenza;
-            this.allergeni=new ArrayList<>(i.allergeni);
-            this.id=i.id;
+        public Ingrediente() {
         }
 
         public String getNome() {
@@ -51,27 +47,20 @@ public class Ingrediente {
             return id;
         }
 
-        @Override
-        public int hashCode() {
-            int M = 17;
-            M = 19 * M + nome.hashCode();
-            M = 19 * M + scadenza.hashCode();
-            return M;
+        public void setId(long id) {
+            this.id = id;
         }
 
-        public boolean equals(Object o){
-            if (o==null) return false;
-            if(!(o instanceof Ingrediente))
-                return false;
-            if(o==this)
-                return true;
-            Ingrediente c = (Ingrediente) o;
-            return c.nome.equals(this.nome) && c.scadenza.equals(this.scadenza);
+        public void setNome(String nome) {
+        this.nome = nome;
         }
 
-        public String toString(){
-            return nome;
+        public void setScadenza(LocalDate scadenza) {
+            this.scadenza = scadenza;
         }
 
+        public void setAllergeni(List<Allergene> allergeni) {
+            this.allergeni = allergeni;
+        }
 }
 

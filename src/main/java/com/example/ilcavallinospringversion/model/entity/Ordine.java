@@ -18,16 +18,16 @@ public class Ordine {
     private long id;
     private Utente utente;
     private LocalDate data;
-    private List<Prodotto> prodottiOrdine;
+    private Carrello carrello;
 
     public Ordine(){
 
     }
-    public Ordine(long id, Utente utente, LocalDate data, List<Prodotto> prodottiOrdine){
+    public Ordine(long id, Utente utente, LocalDate data, Carrello carrello){
         this.id=id;
         this.utente=utente;
         this.data=data;
-        this.prodottiOrdine=prodottiOrdine;
+        this.carrello=carrello;
     }
     public long getId(){
         return id;
@@ -40,16 +40,13 @@ public class Ordine {
     public LocalDate getData(){
         return data;
     }
-    public List<Prodotto> getProdottiOrdine (){
-        return prodottiOrdine;
+    public Carrello getCarrello (){
+        return carrello;
     }
     public double getTotale(){
-        double totale = 0;
-        for (Prodotto p : prodottiOrdine){
-            totale += p.getPrezzo();
-        }
-        return totale;
+        return carrello.getTotale();
     }
+
     public void setId(long id){
         this.id=id;
     }
@@ -62,7 +59,7 @@ public class Ordine {
         this.data=data;
     }
 
-    public void setProdottiOrdine(List<Prodotto> prodotti){
-        this.prodottiOrdine=prodotti;
+    public void setCarrello(Carrello carrello){
+        this.carrello=carrello;
     }
 }

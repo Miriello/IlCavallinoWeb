@@ -19,7 +19,7 @@ public class AllergeneService {
     }
 
     public AllergeneDTO getAllergene(long id){
-        return toDTO(allergeneRepository.getById(id));
+        return toDTO(allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato")));
     }
 
     public List<AllergeneDTO> getAllergeni(){

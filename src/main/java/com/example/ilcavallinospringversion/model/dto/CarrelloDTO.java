@@ -3,15 +3,17 @@ package com.example.ilcavallinospringversion.model.dto;
 
 import com.example.ilcavallinospringversion.model.entity.Prodotto;
 import com.example.ilcavallinospringversion.model.entity.Utente;
+import com.example.ilcavallinospringversion.utility.RigaCarrello;
 
+import java.util.List;
 import java.util.Map;
 
 public class CarrelloDTO {
     private long id;
     private Utente utente;
-    private Map<Prodotto, Integer> elenco;
+    private List<RigaCarrello> elenco;
 
-    public CarrelloDTO(long id, Utente utente, Map<Prodotto, Integer> elenco){
+    public CarrelloDTO(long id, Utente utente, List<RigaCarrello> elenco){
         this.id=id;
         this.utente=utente;
         this.elenco=elenco;
@@ -29,8 +31,12 @@ public class CarrelloDTO {
         return utente;
     }
 
-    public Map<Prodotto,Integer> getElenco(){
+    public List<RigaCarrello> getElenco(){
         return elenco;
+    }
+
+    public void aggiungiRiga(RigaCarrello rg){
+        this.elenco.add(rg);
     }
 
     public void setId(long id){
@@ -41,7 +47,7 @@ public class CarrelloDTO {
         this.utente=utente;
     }
 
-    public void setElenco(Map<Prodotto, Integer> elenco){
+    public void setElenco(List<RigaCarrello> elenco){
         this.elenco=elenco;
     }
 }
