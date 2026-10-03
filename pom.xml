@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>ilCavallinoSpringVersion</artifactId>
+    <artifactId>ilCavallinoBackEnd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ilCavallinoSpringVersion</name>
     <description>ilCavallinoSpringVersion</description>
