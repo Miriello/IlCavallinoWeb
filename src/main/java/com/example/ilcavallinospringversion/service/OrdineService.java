@@ -9,6 +9,7 @@ import com.example.ilcavallinospringversion.repository.OrdineRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,21 +59,26 @@ public class OrdineService {
     public Ordine toEntity(OrdineDTO ordineDTO){
         Ordine ordine = new Ordine();
         ordine.setData(ordineDTO.getData());
-        ordine.setProdottiOrdine(ordineDTO.getProdottiOrdine());
+        ordine.setCarrello(ordineDTO.getUtente().getCarrello());
         return ordine;
     }
     @Transactional
     public OrdineDTO creaOrdine(Utente utente){
         Carrello carrello = carrelloRepository.findByUtente(utente);
-
-        Ordine nuovo = ordineRepository.save();
-        return toDTO(nuovo);
+        Ordine nuovo = new Ordine();
+        nuovo.setCarrello(carrello);
+        nuovo.setData(LocalDate.now());
+        nuovo.setUtente(utente);
+        return toDTO(ordineRepository.save(nuovo));
     }
     @Transactional
     public OrdineDTO aggiornaOrdine(long id, OrdineDTO ordineDTO){
-        Ordine o = toEntity(ordineDTO);
-        Ordine nuovo = ordineRepository.upload(id, o);
-        return toDTO(nuovo);
+       Ordine ordine = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
+       ordine.setData(ordineDTO.getData());
+       ordine.setUtente(ordineDTO.getUtente());
+       ordine.setId(ordineDTO.getId());
+       ordine.setCarrello(ordineDTO.getCarrello());
+       return toDTO(ordineRepository.save(ordine));
     }
     @Transactional
     public void eliminaOrdine(long id){

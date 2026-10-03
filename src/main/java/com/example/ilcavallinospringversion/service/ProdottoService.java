@@ -64,9 +64,14 @@ public class ProdottoService {
     }
     @Transactional
     public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO){
-        Prodotto p = toEntity(prodottoDTO);
-        Prodotto nuovo = prodottoRepository.upload(id,p);
-        return toDTO(p);
+        Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
+        prodotto.setId(prodottoDTO.getId());
+        prodotto.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
+        prodotto.setPrezzo(prodottoDTO.getPrezzo());
+        prodotto.setDescrizione(prodottoDTO.getDescrizione());
+        prodotto.setIngredienti(prodottoDTO.getIngredienti());
+        prodotto.setNome(prodottoDTO.getNome());
+        return toDTO(prodottoRepository.save(prodotto));
     }
 
     @Transactional

@@ -3,6 +3,7 @@ package com.example.ilcavallinospringversion.service;
 import com.example.ilcavallinospringversion.model.dto.IngredienteDTO;
 import com.example.ilcavallinospringversion.model.entity.Ingrediente;
 import com.example.ilcavallinospringversion.repository.IngrendienteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class IngredienteService {
     public IngredienteService(IngrendienteRepository ingrendienteRepository){
         this.ingrendienteRepository=ingrendienteRepository;
     }
-
+    @Transactional
     public List<IngredienteDTO> getIngredienti(){
         List<Ingrediente> ingredienti = ingrendienteRepository.findAll();
         List<IngredienteDTO> ingredientiDTO = new ArrayList<>();
@@ -24,15 +25,23 @@ public class IngredienteService {
         }
         return ingredientiDTO;
     }
+    @Transactional
     public IngredienteDTO getIngrediente(long id){
         return toDTO(ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato")));
     }
+    @Transactional
     public IngredienteDTO aggiungiIngrediente(IngredienteDTO ingredienteDTO){
         return toDTO(ingrendienteRepository.save(toEntity(ingredienteDTO)));
     }
+    @Transactional
     public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO){
-        return toDTO(ingrendienteRepository.upload(id,toEntity(ingredienteDTO)));
+        Ingrediente ingrediente= ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato"));
+        ingrediente.setAllergeni(ingredienteDTO.getAllergeni());
+        ingrediente.setNome(ingredienteDTO.getNome());
+        ingrediente.setScadenza(ingredienteDTO.getScadenza());
+        return toDTO(ingrendienteRepository.save(ingrediente));
     }
+    @Transactional
     public void eliminaIngrediente(long id){
         ingrendienteRepository.deleteById(id);
     }

@@ -33,36 +33,36 @@ public class CarrelloService {
     @Transactional
     public CarrelloDTO aggiungiAlCarrello(Utente utente, long idProdotto, int unita){
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
-        CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
-        if(carrelloDTO.prodottoPresente(prodotto)){
-           carrelloDTO.modificaQuantita(prodotto, carrelloDTO.getQuantitaProdotto(prodotto)+unita);
+        Carrello carrello = carrelloRepository.findByUtente(utente);
+        if(carrello.prodottoPresente(prodotto)){
+           carrello.modificaQuantita(prodotto, carrello.getQuantitaProdotto(prodotto)+unita);
         }
         else{
-            carrelloDTO.aggiungiRiga(new RigaCarrello(prodotto,unita,prodotto.getPrezzo()));
+            carrello.aggiungiRiga(new RigaCarrello(prodotto,unita,prodotto.getPrezzo()));
         }
-        Carrello nuovo = carrelloRepository.save(toEntity(carrelloDTO));
+        Carrello nuovo = carrelloRepository.save(carrello);
         CarrelloDTO nuovoDTO = toDTO(nuovo);
         return nuovoDTO;
     }
 
     @Transactional
     public CarrelloDTO rimuoviProdotto(Utente utente, long idProdotto){
-        CarrelloDTO carrelloDTO = toDTO(carrelloRepository.findByUtente(utente));
+        Carrello carrello = carrelloRepository.findByUtente(utente);
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
-        if(carrelloDTO.prodottoPresente(prodotto)){
-            carrelloDTO.rimuoviRiga(prodotto);
-            CarrelloDTO modificato = toDTO(carrelloRepository.save(toEntity(carrelloDTO)));
+        if(carrello.prodottoPresente(prodotto)){
+            carrello.rimuoviRiga(prodotto);
+            CarrelloDTO modificato = toDTO(carrelloRepository.save(carrello));
             return modificato;
         }
         else {
-            return carrelloDTO;
+            return toDTO(carrello);
         }
     }
     @Transactional
     public CarrelloDTO svuotaCarrello(Utente utente){
-        CarrelloDTO carrelloDTO= toDTO(carrelloRepository.findByUtente(utente));
-        carrelloDTO.setElenco(new ArrayList<>());
-        return toDTO(carrelloRepository.save(toEntity(carrelloDTO)));
+        Carrello carrello= carrelloRepository.findByUtente(utente);
+        carrello.setElenco(new ArrayList<>());
+        return toDTO(carrelloRepository.save(carrello));
     }
 
     public Carrello toEntity(CarrelloDTO carrelloDTO){

@@ -1,5 +1,6 @@
 package com.example.ilcavallinospringversion.model.dto;
 
+import com.example.ilcavallinospringversion.model.entity.Carrello;
 import com.example.ilcavallinospringversion.model.entity.Prodotto;
 import com.example.ilcavallinospringversion.model.entity.Utente;
 
@@ -11,17 +12,17 @@ public class OrdineDTO {
     private long id;
     private Utente utente;
     private LocalDate data;
-    private List<Prodotto> prodottiOrdine;
+    private Carrello carrello;
 
     public OrdineDTO(){
 
     }
 
-    public OrdineDTO(long id, Utente utente, LocalDate data, List<Prodotto> prodottiOrdine){
+    public OrdineDTO(long id, Utente utente, LocalDate data, Carrello carrello){
         this.id=id;
         this.utente=utente;
         this.data=data;
-        this.prodottiOrdine=prodottiOrdine;
+        this.carrello=carrello;
     }
 
     public long getId() {
@@ -48,11 +49,11 @@ public class OrdineDTO {
         this.data = data;
     }
 
-    public List<Prodotto> getProdottiOrdine() {
-        return prodottiOrdine;
+    public Carrello getCarrello() {
+        return carrello;
     }
 
-    public void setProdottiOrdine(List<Prodotto> prodottiOrdine) {
-        this.prodottiOrdine = prodottiOrdine;
+    public void setCarrello (Carrello carrello) {
+        this.carrello = carrello;
     }
 }
