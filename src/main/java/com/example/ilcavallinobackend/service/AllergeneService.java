@@ -5,7 +5,6 @@ import com.example.ilcavallinobackend.model.entity.Allergene;
 import com.example.ilcavallinobackend.repository.AllergeneRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

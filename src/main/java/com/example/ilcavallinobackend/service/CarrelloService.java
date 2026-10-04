@@ -10,7 +10,6 @@ import com.example.ilcavallinobackend.model.entity.RigaCarrello;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class CarrelloService {
@@ -30,13 +29,20 @@ public class CarrelloService {
 
     @Transactional
     public CarrelloDTO aggiungiAlCarrello(Utente utente, long idProdotto, int unita){
+        if(unita <= 0){
+            throw new IllegalArgumentException("La quantità non può essere negativa");
+        }
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
-        Carrello carrello = carrelloRepository.findByUtente(utente);
+        Carrello carrello = carrelloRepository.attivaLock(utente);
         if(carrello.prodottoPresente(prodotto)){
            carrello.modificaQuantita(prodotto, carrello.getQuantitaProdotto(prodotto)+unita);
         }
         else{
-            carrello.aggiungiRiga(new RigaCarrello(prodotto,unita,prodotto.getPrezzo()));
+            RigaCarrello rg = new RigaCarrello();
+            rg.setPrezzo(prodotto.getPrezzo());
+            rg.setProdotto(prodotto);
+            rg.setUnita(unita);
+            carrello.aggiungiRiga(rg);
         }
         Carrello nuovo = carrelloRepository.save(carrello);
         CarrelloDTO nuovoDTO = toDTO(nuovo);
@@ -45,7 +51,7 @@ public class CarrelloService {
 
     @Transactional
     public CarrelloDTO rimuoviProdotto(Utente utente, long idProdotto){
-        Carrello carrello = carrelloRepository.findByUtente(utente);
+        Carrello carrello = carrelloRepository.attivaLock(utente);
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
         if(carrello.prodottoPresente(prodotto)){
             carrello.rimuoviRiga(prodotto);
@@ -58,8 +64,8 @@ public class CarrelloService {
     }
     @Transactional
     public CarrelloDTO svuotaCarrello(Utente utente){
-        Carrello carrello= carrelloRepository.findByUtente(utente);
-        carrello.setElenco(new ArrayList<>());
+        Carrello carrello= carrelloRepository.attivaLock(utente);
+        carrello.getElenco().clear();
         return toDTO(carrelloRepository.save(carrello));
     }
 

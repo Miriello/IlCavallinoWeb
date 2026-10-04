@@ -2,7 +2,6 @@ package com.example.ilcavallinobackend.model.dto;
 
 
 import com.example.ilcavallinobackend.model.entity.RigaCarrello;
-
 import java.util.List;
 
 public class CarrelloDTO {

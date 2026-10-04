@@ -80,4 +80,8 @@ public class Prodotto {
     public void setPrezzo(double prezzo){
         this.prezzo=prezzo;
     }
+
+    public void setUrlImg(String urlImg){
+        this.urlImg=urlImg;
+    }
 }
