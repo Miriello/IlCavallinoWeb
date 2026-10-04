@@ -46,19 +46,15 @@ public class ProdottoService {
         return pr;
     }
 
-    public Prodotto toEntity (ProdottoDTO prodottoDTO){
+    @Transactional
+    public ProdottoDTO creaProdotto(ProdottoDTO prodottoDTO){
         Prodotto p = new Prodotto();
-        p.setId(prodottoDTO.getId());
-        p.setNome(prodottoDTO.getNome());
         p.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
         p.setDescrizione(prodottoDTO.getDescrizione());
         p.setPrezzo(prodottoDTO.getPrezzo());
+        p.setNome(prodottoDTO.getNome());
+        p.setUrlImg(prodottoDTO.getUrlImg());
         p.setIngredienti(prodottoDTO.getIngredienti());
-        return p;
-    }
-    @Transactional
-    public ProdottoDTO creaProdotto(ProdottoDTO prodottoDTO){
-        Prodotto p = toEntity(prodottoDTO);
         Prodotto nuovo = prodottoRepository.save(p);
         return toDTO(nuovo);
     }

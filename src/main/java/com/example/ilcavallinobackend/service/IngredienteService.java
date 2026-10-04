@@ -31,7 +31,12 @@ public class IngredienteService {
     }
     @Transactional
     public IngredienteDTO aggiungiIngrediente(IngredienteDTO ingredienteDTO){
-        return toDTO(ingrendienteRepository.save(toEntity(ingredienteDTO)));
+        Ingrediente nuovo = new Ingrediente();
+        nuovo.setAllergeni(ingredienteDTO.getAllergeni());
+        nuovo.setNome(ingredienteDTO.getNome());
+        nuovo.setScadenza(ingredienteDTO.getScadenza());
+        Ingrediente i = ingrendienteRepository.save(nuovo);
+        return toDTO(i);
     }
     @Transactional
     public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO){
@@ -52,13 +57,5 @@ public class IngredienteService {
         ingredienteDTO.setScadenza(ingrediente.getScadenza());
         ingredienteDTO.setAllergeni(ingrediente.getAllergeni());
         return ingredienteDTO;
-    }
-    public Ingrediente toEntity(IngredienteDTO ingredienteDTO){
-        Ingrediente ingrediente= new Ingrediente();
-        ingrediente.setId(ingredienteDTO.getId());
-        ingrediente.setNome(ingredienteDTO.getNome());
-        ingrediente.setScadenza(ingredienteDTO.getScadenza());
-        ingrediente.setAllergeni(ingredienteDTO.getAllergeni());
-        return ingrediente;
     }
 }

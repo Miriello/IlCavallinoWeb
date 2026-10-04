@@ -30,7 +30,10 @@ public class AllergeneService {
     }
     @Transactional
     public AllergeneDTO aggiungiAllergene(AllergeneDTO allergeneDTO){
-        return toDTO(allergeneRepository.save(toEntity(allergeneDTO)));
+        Allergene nuovo = new Allergene();
+        nuovo.setNome(allergeneDTO.getNome());
+        Allergene a = allergeneRepository.save(nuovo);
+        return toDTO(a);
     }
     @Transactional
     public AllergeneDTO aggiornaAllergene(long id, AllergeneDTO allergeneDTO){
@@ -51,10 +54,4 @@ public class AllergeneService {
         return allergeneDTO;
     }
 
-    public Allergene toEntity(AllergeneDTO allergeneDTO) {
-        Allergene allergene = new Allergene();
-        allergene.setId(allergeneDTO.getId());
-        allergene.setNome(allergeneDTO.getNome());
-        return allergene;
-    }
 }
