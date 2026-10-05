@@ -32,8 +32,7 @@ public class AllergeneService {
     public AllergeneDTO aggiungiAllergene(AllergeneDTO allergeneDTO){
         Allergene nuovo = new Allergene();
         nuovo.setNome(allergeneDTO.getNome());
-        Allergene a = allergeneRepository.save(nuovo);
-        return toDTO(a);
+        return toDTO(allergeneRepository.save(nuovo));
     }
     @Transactional
     public AllergeneDTO aggiornaAllergene(long id, AllergeneDTO allergeneDTO){

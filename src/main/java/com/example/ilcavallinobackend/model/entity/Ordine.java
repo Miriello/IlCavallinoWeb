@@ -13,6 +13,7 @@ public class Ordine {
     @ManyToOne
     private Utente utente;
     private LocalDate data;
+    @OneToOne
     private Carrello carrello;
 
     public Ordine(){

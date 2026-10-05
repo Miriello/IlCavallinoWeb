@@ -26,6 +26,7 @@ public class Utente implements UserDetails {
     @Column(nullable = false)
     private Ruolo ruolo;
     @OneToOne
+    @JoinColumn(name = "carrello_id", unique = true)
     private Carrello carrello;
 
     public Utente(){

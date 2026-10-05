@@ -35,8 +35,7 @@ public class IngredienteService {
         nuovo.setAllergeni(ingredienteDTO.getAllergeni());
         nuovo.setNome(ingredienteDTO.getNome());
         nuovo.setScadenza(ingredienteDTO.getScadenza());
-        Ingrediente i = ingrendienteRepository.save(nuovo);
-        return toDTO(i);
+        return toDTO(ingrendienteRepository.save(nuovo));
     }
     @Transactional
     public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO){

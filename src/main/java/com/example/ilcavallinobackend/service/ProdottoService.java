@@ -48,15 +48,14 @@ public class ProdottoService {
 
     @Transactional
     public ProdottoDTO creaProdotto(ProdottoDTO prodottoDTO){
-        Prodotto p = new Prodotto();
-        p.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
-        p.setDescrizione(prodottoDTO.getDescrizione());
-        p.setPrezzo(prodottoDTO.getPrezzo());
-        p.setNome(prodottoDTO.getNome());
-        p.setUrlImg(prodottoDTO.getUrlImg());
-        p.setIngredienti(prodottoDTO.getIngredienti());
-        Prodotto nuovo = prodottoRepository.save(p);
-        return toDTO(nuovo);
+        Prodotto nuovo = new Prodotto();
+        nuovo.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
+        nuovo.setDescrizione(prodottoDTO.getDescrizione());
+        nuovo.setPrezzo(prodottoDTO.getPrezzo());
+        nuovo.setNome(prodottoDTO.getNome());
+        nuovo.setUrlImg(prodottoDTO.getUrlImg());
+        nuovo.setIngredienti(prodottoDTO.getIngredienti());
+        return toDTO(prodottoRepository.save(nuovo));
     }
     @Transactional
     public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO){
@@ -66,6 +65,7 @@ public class ProdottoService {
         prodotto.setDescrizione(prodottoDTO.getDescrizione());
         prodotto.setIngredienti(prodottoDTO.getIngredienti());
         prodotto.setNome(prodottoDTO.getNome());
+        prodotto.setUrlImg(prodottoDTO.getUrlImg());
         return toDTO(prodottoRepository.save(prodotto));
     }
 
