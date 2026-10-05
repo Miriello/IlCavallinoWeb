@@ -1,9 +1,6 @@
 package com.example.ilcavallinobackend.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="allergeni")
@@ -12,7 +9,7 @@ public class Allergene {
     @Id
     @GeneratedValue
     private long id;
-
+    @Column(nullable = false)
     private String nome;
 
     public Allergene(){

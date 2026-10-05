@@ -1,9 +1,6 @@
 package com.example.ilcavallinobackend.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class RigaCarrello {
@@ -11,9 +8,12 @@ public class RigaCarrello {
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="prodotto_id")
     private Prodotto prodotto;
+    @Column(nullable = false)
     private int unita;
+    @Column(nullable = false)
     private double prezzo;
 
     public RigaCarrello(){

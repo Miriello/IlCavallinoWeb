@@ -12,12 +12,15 @@ public class Prodotto {
     @Id
     @GeneratedValue
     private long id;
+    @Column(nullable = false)
     private String nome;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private CategoriaProdotto categoriaProdotto;
     private String descrizione;
+    @Column(nullable = false)
     private double prezzo;
-    @OneToMany
+    @OManyToMany
     private List<Ingrediente> ingredienti = new ArrayList<>();
     private String urlImg;
 

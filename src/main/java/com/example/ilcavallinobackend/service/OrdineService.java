@@ -6,6 +6,7 @@ import com.example.ilcavallinobackend.model.dto.OrdineDTO;
 import com.example.ilcavallinobackend.model.entity.Utente;
 import com.example.ilcavallinobackend.repository.CarrelloRepository;
 import com.example.ilcavallinobackend.repository.OrdineRepository;
+import com.example.ilcavallinobackend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,12 @@ public class OrdineService {
 
     private final OrdineRepository ordineRepository;
     private final CarrelloRepository carrelloRepository;
+    private final UtenteRepository utenteRepository;
 
-    public OrdineService(OrdineRepository ordineRepository, CarrelloRepository carrelloRepository){
+    public OrdineService(OrdineRepository ordineRepository, CarrelloRepository carrelloRepository, UtenteRepository utenteRepository){
         this.ordineRepository=ordineRepository;
         this.carrelloRepository=carrelloRepository;
+        this.utenteRepository = utenteRepository;
     }
 
     @Transactional
@@ -62,11 +65,17 @@ public class OrdineService {
     @Transactional
     public OrdineDTO creaOrdine(Utente utente){
         Carrello carrello = carrelloRepository.attivaLock(utente);
-        Ordine nuovo = new Ordine();
-        nuovo.setCarrello(carrello);
-        nuovo.setData(LocalDate.now());
-        nuovo.setUtente(utente);
-        return toDTO(ordineRepository.save(nuovo));
+        Ordine nuovoOrdine = new Ordine();
+        nuovoOrdine.setCarrello(carrello);
+        nuovoOrdine.setData(LocalDate.now());
+        nuovoOrdine.setUtente(utente);
+        Ordine creato = ordineRepository.save(nuovoOrdine);
+        Carrello nuovoCarrello = new Carrello();
+        nuovoCarrello.setUtente(utente);
+        utente.setCarrello(nuovoCarrello);
+        carrelloRepository.save(nuovoCarrello);
+        utenteRepository.save(utente);
+        return toDTO(creato);
     }
     @Transactional
     public OrdineDTO aggiornaOrdine(long id, OrdineDTO ordineDTO){

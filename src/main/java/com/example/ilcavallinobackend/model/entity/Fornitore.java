@@ -1,9 +1,6 @@
 package com.example.ilcavallinobackend.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -13,9 +10,11 @@ public class Fornitore {
     @Id
     @GeneratedValue
     private long id;
-
+    @Column(nullable = false)
     private String partitaIva;
+    @Column(nullable = false)
     private String ragioneSociale;
+    @Column(nullable = false)
     private String email;
 
     public Fornitore(){

@@ -12,9 +12,9 @@ public class Carrello {
     @Id
     @GeneratedValue
     private long id;
-    @OneToMany
+    @OneToMany(cascade =CascadeType.ALL, orphanRemoval = true)
     private List<RigaCarrello> elenco = new ArrayList<>();
-    @OneToOne(mappedBy = "carrello")
+    @OneToOne(mappedBy = "carrello", optional = false)
     private Utente utente;
 
 
