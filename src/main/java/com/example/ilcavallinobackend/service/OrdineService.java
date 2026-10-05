@@ -65,7 +65,7 @@ public class OrdineService {
     // CREO UN NUOVO ORDINE, AL SUO INTERNO NON INSERISCO IL CARRELLO
     // RECUPERATO DALL'UTENTE, MA UNA COPIA.
     // IN QUESTO MODO IL CARRELLO DELL'UTENTE VERRA' SEMPLICEMENTE SVUOTATO.
-    
+
     @Transactional
     public OrdineDTO creaOrdine(Utente utente){
         Carrello carrello = carrelloRepository.attivaLock(utente);
@@ -87,13 +87,6 @@ public class OrdineService {
         ordine.setCarrello(nuovoCarrello);
         carrello.getElenco().clear();
         return toDTO(ordineRepository.save(ordine));
-    }
-    @Transactional
-    public OrdineDTO aggiornaOrdine(long id, OrdineDTO ordineDTO){
-       Ordine ordine = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
-       ordine.setData(ordineDTO.getData());
-       ordine.setCarrello(ordineDTO.getCarrello());
-       return toDTO(ordineRepository.save(ordine));
     }
     @Transactional
     public void eliminaOrdine(long id){

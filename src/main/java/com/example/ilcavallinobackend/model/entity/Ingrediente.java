@@ -52,7 +52,10 @@ public class Ingrediente {
         this.scadenza = scadenza;
     }
     public void setAllergeni(List<Allergene> allergeni) {
-        this.allergeni = allergeni;
+        if(allergeni != null) {
+            this.allergeni = allergeni;
+        }
+        this.allergeni = new ArrayList<>();
     }
 }
 

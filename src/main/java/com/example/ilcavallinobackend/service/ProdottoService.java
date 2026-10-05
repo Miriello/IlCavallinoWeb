@@ -43,6 +43,7 @@ public class ProdottoService {
         pr.setDescrizione(prodotto.getDescrizione());
         pr.setPrezzo(prodotto.getPrezzo());
         pr.setIngredienti(prodotto.getIngredienti());
+        pr.setUrlImg(prodotto.getUrlImg());
         return pr;
     }
 
