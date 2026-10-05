@@ -3,6 +3,7 @@ package com.example.ilcavallinobackend.service;
 import com.example.ilcavallinobackend.model.entity.Carrello;
 import com.example.ilcavallinobackend.model.entity.Ordine;
 import com.example.ilcavallinobackend.model.dto.OrdineDTO;
+import com.example.ilcavallinobackend.model.entity.RigaCarrello;
 import com.example.ilcavallinobackend.model.entity.Utente;
 import com.example.ilcavallinobackend.repository.CarrelloRepository;
 import com.example.ilcavallinobackend.repository.OrdineRepository;
@@ -19,12 +20,10 @@ public class OrdineService {
 
     private final OrdineRepository ordineRepository;
     private final CarrelloRepository carrelloRepository;
-    private final UtenteRepository utenteRepository;
 
     public OrdineService(OrdineRepository ordineRepository, CarrelloRepository carrelloRepository, UtenteRepository utenteRepository){
         this.ordineRepository=ordineRepository;
         this.carrelloRepository=carrelloRepository;
-        this.utenteRepository = utenteRepository;
     }
 
     @Transactional
@@ -62,20 +61,32 @@ public class OrdineService {
         return ordineDTO;
     }
 
+    // RECUPERO IL CARRELLO DALL'UTENTE E APPLICO UN LOCK PESSIMISTICO.
+    // CREO UN NUOVO ORDINE, AL SUO INTERNO NON INSERISCO IL CARRELLO
+    // RECUPERATO DALL'UTENTE, MA UNA COPIA.
+    // IN QUESTO MODO IL CARRELLO DELL'UTENTE VERRA' SEMPLICEMENTE SVUOTATO.
+    
     @Transactional
     public OrdineDTO creaOrdine(Utente utente){
         Carrello carrello = carrelloRepository.attivaLock(utente);
-        Ordine nuovoOrdine = new Ordine();
-        nuovoOrdine.setCarrello(carrello);
-        nuovoOrdine.setData(LocalDate.now());
-        nuovoOrdine.setUtente(utente);
-        Ordine creato = ordineRepository.save(nuovoOrdine);
+        if(carrello.getElenco().isEmpty()){
+            throw new IllegalArgumentException("Il carrello è vuoto!");
+        }
+        Ordine ordine = new Ordine();
+        ordine.setData(LocalDate.now());
+        ordine.setUtente(utente);
         Carrello nuovoCarrello = new Carrello();
-        nuovoCarrello.setUtente(utente);
-        utente.setCarrello(nuovoCarrello);
+        for(RigaCarrello rg : carrello.getElenco()){
+            RigaCarrello nuovaRiga = new RigaCarrello();
+            nuovaRiga.setProdotto(rg.getProdotto());
+            nuovaRiga.setPrezzo(rg.getPrezzo());
+            nuovaRiga.setUnita(rg.getUnita());
+            nuovoCarrello.aggiungiRiga(nuovaRiga);
+        }
         carrelloRepository.save(nuovoCarrello);
-        utenteRepository.save(utente);
-        return toDTO(creato);
+        ordine.setCarrello(nuovoCarrello);
+        carrello.getElenco().clear();
+        return toDTO(ordineRepository.save(ordine));
     }
     @Transactional
     public OrdineDTO aggiornaOrdine(long id, OrdineDTO ordineDTO){

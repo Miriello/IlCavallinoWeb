@@ -14,7 +14,7 @@ public class Carrello {
     private long id;
     @OneToMany(cascade =CascadeType.ALL, orphanRemoval = true)
     private List<RigaCarrello> elenco = new ArrayList<>();
-    @OneToOne(mappedBy = "carrello", optional = false)
+    @OneToOne(mappedBy = "carrello")
     private Utente utente;
 
 

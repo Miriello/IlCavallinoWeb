@@ -20,7 +20,7 @@ public class Prodotto {
     private String descrizione;
     @Column(nullable = false)
     private double prezzo;
-    @OManyToMany
+    @ManyToMany
     private List<Ingrediente> ingredienti = new ArrayList<>();
     private String urlImg;
 

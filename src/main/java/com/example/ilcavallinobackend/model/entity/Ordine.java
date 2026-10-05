@@ -11,11 +11,11 @@ public class Ordine {
     @GeneratedValue
     private long id;
     @ManyToOne
-    @JoinColumn(name="utente_id")
+    @JoinColumn(name="utente_id", nullable = false)
     private Utente utente;
     private LocalDate data;
     @OneToOne
-    @JoinColumn(name="carrello_id", nullable=false )
+    @JoinColumn(name="carrello_id", nullable=false, unique = true)
     private Carrello carrello;
 
     public Ordine(){
