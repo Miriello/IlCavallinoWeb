@@ -90,6 +90,8 @@ public class OrdineService {
     }
     @Transactional
     public void eliminaOrdine(long id){
-        ordineRepository.deleteById(id);
+        Ordine daCancellare = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
+        carrelloRepository.deleteById(daCancellare.getCarrello().getId());
+        ordineRepository.delete(daCancellare);
     }
 }

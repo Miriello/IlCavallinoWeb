@@ -18,7 +18,7 @@ public class Ingrediente {
     private String nome;
     private LocalDate scadenza;
     @ManyToMany
-    private List<Allergene> allergeni;
+    private List<Allergene> allergeni = new ArrayList<>();
 
 
     public Ingrediente(String nome, LocalDate scadenza, List<Allergene> allergeni, int id) {
@@ -55,7 +55,9 @@ public class Ingrediente {
         if(allergeni != null) {
             this.allergeni = allergeni;
         }
-        this.allergeni = new ArrayList<>();
+        else {
+            this.allergeni = new ArrayList<>();
+        }
     }
 }
 
