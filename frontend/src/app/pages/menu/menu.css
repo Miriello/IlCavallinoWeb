@@ -1,0 +1,35 @@
+.menu {
+  padding: 40px;
+  text-align: center;
+}
+
+.prodotti {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.prodotto {
+  width: 250px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.prodotto h2 {
+  color: #8b2525;
+}
+
+.prodotto button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 15px;
+  background-color: #8b2525;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
