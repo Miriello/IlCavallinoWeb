@@ -1,7 +1,6 @@
 package com.example.ilcavallinobackend.model.dto;
 
 import com.example.ilcavallinobackend.model.entity.CategoriaProdotto;
-import com.example.ilcavallinobackend.model.entity.Ingrediente;
 import java.util.List;
 
 public class ProdottoDTO {
@@ -11,11 +10,11 @@ public class ProdottoDTO {
     private CategoriaProdotto categoriaProdotto;
     private String descrizione;
     private double prezzo;
-    private List<Ingrediente> ingredienti;
+    private List<IngredienteDTO> ingredienti;
     private String urlImg;
 
 
-    public ProdottoDTO(long id, String nome, CategoriaProdotto categoriaProdotto, String descrizione, double prezzo, List<Ingrediente> ingredienti, String urlImg){
+    public ProdottoDTO(long id, String nome, CategoriaProdotto categoriaProdotto, String descrizione, double prezzo, List<IngredienteDTO> ingredienti, String urlImg){
         this.id=id;
         this.nome=nome;
         this.categoriaProdotto=categoriaProdotto;
@@ -49,7 +48,7 @@ public class ProdottoDTO {
         return prezzo;
     }
 
-    public List<Ingrediente> getIngredienti(){
+    public List<IngredienteDTO> getIngredienti(){
         return ingredienti;
     }
 
@@ -77,7 +76,7 @@ public class ProdottoDTO {
         this.prezzo = prezzo;
     }
 
-    public void setIngredienti(List<Ingrediente> ingredienti) {
+    public void setIngredienti(List<IngredienteDTO> ingredienti) {
         this.ingredienti = ingredienti;
     }
 

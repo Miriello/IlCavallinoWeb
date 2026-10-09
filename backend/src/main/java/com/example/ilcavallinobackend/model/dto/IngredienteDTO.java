@@ -1,7 +1,5 @@
 package com.example.ilcavallinobackend.model.dto;
 
-import com.example.ilcavallinobackend.model.entity.Allergene;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,12 +8,12 @@ public class IngredienteDTO {
     private long id;
     private String nome;
     private LocalDate scadenza;
-    private List<Allergene> allergeni;
+    private List<AllergeneDTO> allergeni;
 
     public IngredienteDTO(){
 
     }
-    public IngredienteDTO(long id, String nome, LocalDate scadenza, List<Allergene> allergeni){
+    public IngredienteDTO(long id, String nome, LocalDate scadenza, List<AllergeneDTO> allergeni){
         this.id=id;
         this.nome=nome;
         this.scadenza=scadenza;
@@ -46,11 +44,11 @@ public class IngredienteDTO {
         this.scadenza = scadenza;
     }
 
-    public List<Allergene> getAllergeni() {
+    public List<AllergeneDTO> getAllergeni() {
         return allergeni;
     }
 
-    public void setAllergeni(List<Allergene> allergeni) {
+    public void setAllergeni(List<AllergeneDTO> allergeni) {
         this.allergeni = allergeni;
     }
 }

@@ -1,15 +1,13 @@
 package com.example.ilcavallinobackend.model.dto;
 
-
-import com.example.ilcavallinobackend.model.entity.RigaCarrello;
 import java.util.List;
 
 public class CarrelloDTO {
     private long id;
     private String username;
-    private List<RigaCarrello> elenco;
+    private List<RigaCarrelloDTO> elenco;
 
-    public CarrelloDTO(long id, String username, List<RigaCarrello> elenco){
+    public CarrelloDTO(long id, String username, List<RigaCarrelloDTO> elenco){
         this.id=id;
         this.username=username;
         this.elenco=elenco;
@@ -27,7 +25,7 @@ public class CarrelloDTO {
         return username;
     }
 
-    public List<RigaCarrello> getElenco(){
+    public List<RigaCarrelloDTO> getElenco(){
         return elenco;
     }
 
@@ -39,7 +37,7 @@ public class CarrelloDTO {
         this.username=username;
     }
 
-    public void setElenco(List<RigaCarrello> elenco){
+    public void setElenco(List<RigaCarrelloDTO> elenco){
         this.elenco=elenco;
     }
 }

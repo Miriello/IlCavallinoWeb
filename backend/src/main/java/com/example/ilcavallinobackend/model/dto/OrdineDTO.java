@@ -8,17 +8,17 @@ public class OrdineDTO {
     private long id;
     private String username;
     private LocalDate data;
-    private Carrello carrello;
+    private CarrelloDTO carrelloDTO;
 
     public OrdineDTO(){
 
     }
 
-    public OrdineDTO(long id, String username, LocalDate data, Carrello carrello){
+    public OrdineDTO(long id, String username, LocalDate data, CarrelloDTO carrelloDTO){
         this.id=id;
         this.username=username;
         this.data=data;
-        this.carrello=carrello;
+        this.carrelloDTO=carrelloDTO;
     }
 
     public long getId() {
@@ -45,11 +45,11 @@ public class OrdineDTO {
         this.data = data;
     }
 
-    public Carrello getCarrello() {
-        return carrello;
+    public CarrelloDTO getCarrello() {
+        return carrelloDTO;
     }
 
-    public void setCarrello (Carrello carrello) {
-        this.carrello = carrello;
+    public void setCarrello (CarrelloDTO carrelloDTO) {
+        this.carrelloDTO = carrelloDTO;
     }
 }
