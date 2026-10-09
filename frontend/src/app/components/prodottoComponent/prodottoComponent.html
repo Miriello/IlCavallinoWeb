@@ -1,0 +1,13 @@
+<h1> Ecco l'elenco dei nostri prodotti </h1>
+<div class = "listaProdotti">
+@for (prodotto of prodotti; track prodotto.id){
+    <div class = "prodottoComponent">
+    <p>{{prodotto.nome}}</p>
+    <p>{{prodotto.descrizione}}</p>
+    <strong> {{ prodotto.prezzo }} <strong>
+    <img [src] = getImmagine() />
+    <button (click) = "aggiungiAlCarrello(prodotto)"> Aggiungi al carrello </button>
+    <p> Prezzo: {{prodotto.prezzo}}</p>
+    </div>
+}
+</div>
