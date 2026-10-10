@@ -43,7 +43,6 @@ public class AutenticazioneService {
                 )
         );
 
-        // Sappiamo che esiste perche' l'autenticazione e' andata a buon fine.
         Utente utente = utenteRepository.findByUsername(request.getUsername()).orElseThrow();
 
         String token = jwtService.generaToken(claimsConRuolo(utente), utente);
@@ -52,10 +51,10 @@ public class AutenticazioneService {
     }
 
     public AutenticazioneResponse registrazione(RegistrazioneRequest request ){
-        if(utenteRepository.existByUsername(request.getUsername()){
+        if(utenteRepository.existByUsername(request.getUsername())){
             throw new IllegalArgumentException("Username già presente");
         }
-        if(utenteRepository.existByEmail(request.getEmail()){
+        if(utenteRepository.existByEmail(request.getEmail())){
             throw new IllegalArgumentException("Email già presente");
         }
         Utente utente = new Utente(request.getUsername(),request.getPassword(),passwordEncoder.encode(request.getPassword()), Ruolo.USER);
