@@ -9,6 +9,7 @@ import com.example.ilcavallinobackend.model.entity.Utente;
 import com.example.ilcavallinobackend.repository.CarrelloRepository;
 import com.example.ilcavallinobackend.repository.UtenteRepository;
 import com.example.ilcavallinobackend.security.JwtService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -55,16 +56,18 @@ public class AutenticazioneService {
         return new AutenticazioneResponse(token, utente.getUsername(), utente.getRuolo(), jwtExpirationMs);
     }
 
+    @Transactional
     public AutenticazioneResponse registrazione(RegistrazioneRequest request ){
-        if(utenteRepository.existByUsername(request.getUsername())){
+        if(utenteRepository.existsByUsername(request.getUsername())){
             throw new IllegalArgumentException("Username già presente");
         }
-        if(utenteRepository.existByEmail(request.getEmail())){
+        if(utenteRepository.existsByEmail(request.getEmail())){
             throw new IllegalArgumentException("Email già presente");
         }
-        Utente utente = new Utente(request.getUsername(),request.getPassword(),passwordEncoder.encode(request.getPassword()), Ruolo.USER);
+        Utente utente = new Utente(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getEmail(), Ruolo.USER);
+        Carrello carrello = carrelloRepository.save(new Carrello());
+        utente.setCarrello(carrello);
         utenteRepository.save(utente);
-        carrelloRepository.save(new Carrello());
         String token = jwtService.generaToken(claimsConRuolo(utente), utente);
         return new AutenticazioneResponse(token, utente.getUsername(), utente.getRuolo(), jwtExpirationMs);
     }
