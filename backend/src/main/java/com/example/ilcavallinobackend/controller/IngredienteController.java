@@ -25,26 +25,26 @@ public class IngredienteController {
 
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<IngredienteDTO> getIngrediente(@PathVariable long id){
         IngredienteDTO ingrediente= ingredienteService.getIngrediente(id);
         return ResponseEntity.ok(ingrediente);
     }
     @PostMapping
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public  ResponseEntity<IngredienteDTO> aggiungiIngrediente(@RequestBody IngredienteDTO ingredienteDTO){
         IngredienteDTO nuovo= ingredienteService.aggiungiIngrediente(ingredienteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
 
     }
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public  ResponseEntity<IngredienteDTO> aggiornaIngrediente(@PathVariable long id, @RequestBody IngredienteDTO ingredienteDTO){
         IngredienteDTO modificato = ingredienteService.aggiornaIngrediente(id, ingredienteDTO);
         return ResponseEntity.ok(modificato);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void eliminaIngrediente(@PathVariable long id){
         ingredienteService.eliminaIngrediente(id);
     }

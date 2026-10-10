@@ -21,7 +21,7 @@ public class OrdineController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<OrdineDTO>> getOrdini(){
         List<OrdineDTO> ordini = ordineService.getOrdini();
         return ResponseEntity.ok(ordini);
@@ -49,7 +49,7 @@ public class OrdineController {
 
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Void> eliminaOrdine(@PathVariable long id){
         ordineService.eliminaOrdine(id);
         return ResponseEntity.noContent().build();

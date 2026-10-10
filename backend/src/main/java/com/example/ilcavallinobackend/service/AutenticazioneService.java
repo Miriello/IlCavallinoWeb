@@ -3,8 +3,10 @@ package com.example.ilcavallinobackend.service;
 import com.example.ilcavallinobackend.model.dto.AutenticazioneResponse;
 import com.example.ilcavallinobackend.model.dto.LoginRequest;
 import com.example.ilcavallinobackend.model.dto.RegistrazioneRequest;
+import com.example.ilcavallinobackend.model.entity.Carrello;
 import com.example.ilcavallinobackend.model.entity.Ruolo;
 import com.example.ilcavallinobackend.model.entity.Utente;
+import com.example.ilcavallinobackend.repository.CarrelloRepository;
 import com.example.ilcavallinobackend.repository.UtenteRepository;
 import com.example.ilcavallinobackend.security.JwtService;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +21,7 @@ import java.util.Map;
 @Service
 public class AutenticazioneService {
     private final UtenteRepository utenteRepository;
+    private final CarrelloRepository carrelloRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
@@ -26,10 +29,12 @@ public class AutenticazioneService {
     private long jwtExpirationMs;
 
     public AutenticazioneService(UtenteRepository utenteRepository,
+                                 CarrelloRepository carrelloRepository,
                                  PasswordEncoder passwordEncoder,
                                  AuthenticationManager authenticationManager,
                                  JwtService jwtService){
         this.utenteRepository=utenteRepository;
+        this.carrelloRepository=carrelloRepository;
         this.passwordEncoder=passwordEncoder;
         this.authenticationManager=authenticationManager;
         this.jwtService=jwtService;
@@ -59,6 +64,7 @@ public class AutenticazioneService {
         }
         Utente utente = new Utente(request.getUsername(),request.getPassword(),passwordEncoder.encode(request.getPassword()), Ruolo.USER);
         utenteRepository.save(utente);
+        carrelloRepository.save(new Carrello());
         String token = jwtService.generaToken(claimsConRuolo(utente), utente);
         return new AutenticazioneResponse(token, utente.getUsername(), utente.getRuolo(), jwtExpirationMs);
     }

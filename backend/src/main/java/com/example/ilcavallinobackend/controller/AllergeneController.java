@@ -30,19 +30,19 @@ public class AllergeneController {
        return ResponseEntity.ok(allergene);
     }
     @PostMapping
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<AllergeneDTO> aggiungiAllergene(@RequestBody AllergeneDTO allergeneDTO){
         AllergeneDTO nuovo = allergeneService.aggiungiAllergene(allergeneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
     }
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<AllergeneDTO> aggiornaAllergene(@PathVariable long id, @RequestBody AllergeneDTO allergeneDTO ){
         AllergeneDTO modificato = allergeneService.aggiornaAllergene(id,allergeneDTO);
         return ResponseEntity.ok(modificato);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('CUCINA','SOCIO','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void eliminaAllergene(@PathVariable long id){
         allergeneService.eliminaAllergene(id);
     }
