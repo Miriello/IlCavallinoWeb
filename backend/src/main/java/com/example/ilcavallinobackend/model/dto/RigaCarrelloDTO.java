@@ -1,7 +1,5 @@
 package com.example.ilcavallinobackend.model.dto;
 
-import com.example.ilcavallinobackend.model.entity.Prodotto;
-
 public class RigaCarrelloDTO {
     private ProdottoDTO prodottoDTO;
     private int unita;

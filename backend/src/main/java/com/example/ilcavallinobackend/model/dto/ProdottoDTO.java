@@ -1,14 +1,21 @@
 package com.example.ilcavallinobackend.model.dto;
 
 import com.example.ilcavallinobackend.model.entity.CategoriaProdotto;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public class ProdottoDTO {
 
     private long id;
+    @NotBlank
     private String nome;
+    @NotNull
     private CategoriaProdotto categoriaProdotto;
     private String descrizione;
+    @DecimalMin("0,01")
     private double prezzo;
     private List<IngredienteDTO> ingredienti;
     private String urlImg;

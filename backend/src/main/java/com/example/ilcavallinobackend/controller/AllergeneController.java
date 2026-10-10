@@ -2,6 +2,7 @@ package com.example.ilcavallinobackend.controller;
 
 import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
 import com.example.ilcavallinobackend.service.AllergeneService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,13 +32,13 @@ public class AllergeneController {
     }
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<AllergeneDTO> aggiungiAllergene(@RequestBody AllergeneDTO allergeneDTO){
+    public ResponseEntity<AllergeneDTO> aggiungiAllergene(@Valid @RequestBody AllergeneDTO allergeneDTO){
         AllergeneDTO nuovo = allergeneService.aggiungiAllergene(allergeneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<AllergeneDTO> aggiornaAllergene(@PathVariable long id, @RequestBody AllergeneDTO allergeneDTO ){
+    public ResponseEntity<AllergeneDTO> aggiornaAllergene(@PathVariable long id, @Valid @RequestBody AllergeneDTO allergeneDTO ){
         AllergeneDTO modificato = allergeneService.aggiornaAllergene(id,allergeneDTO);
         return ResponseEntity.ok(modificato);
     }

@@ -1,11 +1,14 @@
 package com.example.ilcavallinobackend.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class IngredienteDTO {
 
     private long id;
+    @NotBlank
     private String nome;
     private LocalDate scadenza;
     private List<AllergeneDTO> allergeni;

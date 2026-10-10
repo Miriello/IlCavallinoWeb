@@ -2,6 +2,7 @@ package com.example.ilcavallinobackend.controller;
 
 import com.example.ilcavallinobackend.model.dto.ProdottoDTO;
 import com.example.ilcavallinobackend.service.ProdottoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,14 +34,14 @@ public class ProdottoController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<ProdottoDTO> creaProdotto(@RequestBody ProdottoDTO prodottoDTO){
+    public ResponseEntity<ProdottoDTO> creaProdotto(@Valid @RequestBody ProdottoDTO prodottoDTO){
         ProdottoDTO nuovo = prodottoService.creaProdotto(prodottoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuovo);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<ProdottoDTO> aggiornaProdotto(@PathVariable long id , @RequestBody ProdottoDTO prodottoDTO){
+    public ResponseEntity<ProdottoDTO> aggiornaProdotto(@PathVariable long id , @Valid @RequestBody ProdottoDTO prodottoDTO){
         ProdottoDTO nuovo = prodottoService.aggiornaProdotto(id, prodottoDTO);
         return ResponseEntity.ok(nuovo);
     }

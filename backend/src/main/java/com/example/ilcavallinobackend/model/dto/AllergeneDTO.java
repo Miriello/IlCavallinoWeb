@@ -1,8 +1,11 @@
 package com.example.ilcavallinobackend.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AllergeneDTO {
 
     private long id;
+    @NotBlank
     private String nome;
 
     public AllergeneDTO(){
