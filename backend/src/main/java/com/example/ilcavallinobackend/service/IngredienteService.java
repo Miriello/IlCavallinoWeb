@@ -6,6 +6,7 @@ import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
 import com.example.ilcavallinobackend.model.dto.IngredienteDTO;
 import com.example.ilcavallinobackend.model.entity.Allergene;
 import com.example.ilcavallinobackend.model.entity.Ingrediente;
+import com.example.ilcavallinobackend.repository.AllergeneRepository;
 import com.example.ilcavallinobackend.repository.IngrendienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class IngredienteService {
     private IngrendienteRepository ingrendienteRepository;
+    private AllergeneRepository allergeneRepository;
 
     public IngredienteService(IngrendienteRepository ingrendienteRepository){
         this.ingrendienteRepository=ingrendienteRepository;
@@ -35,12 +37,15 @@ public class IngredienteService {
     }
     @Transactional
     public IngredienteDTO aggiungiIngrediente(IngredienteDTO ingredienteDTO){
-        return IngredienteMapper.toDTO(ingrendienteRepository.save(IngredienteMapper.toEntity(ingredienteDTO)));
+        Ingrediente ingrediente = IngredienteMapper.toEntity(ingredienteDTO);
+        ingrediente.setAllergeni(recuperaAllergeni(ingredienteDTO));
+        return IngredienteMapper.toDTO(ingrendienteRepository.save(ingrediente));
     }
     @Transactional
-    public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO){
-        Ingrediente ingrediente= ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato"));
+    public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO) {
+        Ingrediente ingrediente = ingrendienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ingrediente non trovato"));
         IngredienteMapper.update(ingrediente, ingredienteDTO);
+        ingrediente.setAllergeni(recuperaAllergeni(ingredienteDTO));
         return IngredienteMapper.toDTO(ingrendienteRepository.save(ingrediente));
     }
     @Transactional
@@ -48,4 +53,15 @@ public class IngredienteService {
         ingrendienteRepository.deleteById(id);
     }
 
+    private List<Allergene> recuperaAllergeni(IngredienteDTO ingredienteDTO){
+        List<Allergene> allergeni = new ArrayList<>();
+        if(ingredienteDTO.getAllergeni()==null){
+            return List.of();
+        }
+        for (AllergeneDTO allergeneDTO : ingredienteDTO.getAllergeni()){
+            Allergene allergene = allergeneRepository.findById(allergeneDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));
+            allergeni.add(allergene);
+        }
+        return allergeni;
+    }
 }

@@ -31,8 +31,7 @@ public class AllergeneService {
     }
     @Transactional
     public AllergeneDTO aggiungiAllergene(AllergeneDTO allergeneDTO){
-        Allergene nuovo = new Allergene();
-        nuovo.setNome(allergeneDTO.getNome());
+        Allergene nuovo = AllergeneMapper.toEntity(allergeneDTO);
         return AllergeneMapper.toDTO(allergeneRepository.save(nuovo));
     }
     @Transactional

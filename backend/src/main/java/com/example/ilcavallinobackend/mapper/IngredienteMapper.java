@@ -17,14 +17,12 @@ public class IngredienteMapper {
     public static Ingrediente toEntity(IngredienteDTO ingredienteDTO){
         Ingrediente ingrediente = new Ingrediente();
         ingrediente.setNome(ingredienteDTO.getNome());
-        ingrediente.setAllergeni(ingredienteDTO.getAllergeni().stream().map(AllergeneMapper::toEntity).toList());
         ingrediente.setScadenza(ingredienteDTO.getScadenza());
         return ingrediente;
     }
 
     public static void update(Ingrediente ingrediente, IngredienteDTO ingredienteDTO){
         ingrediente.setNome(ingredienteDTO.getNome());
-        ingrediente.setAllergeni(ingredienteDTO.getAllergeni().stream().map(AllergeneMapper::toEntity).toList());
         ingrediente.setScadenza(ingredienteDTO.getScadenza());
     }
 }
