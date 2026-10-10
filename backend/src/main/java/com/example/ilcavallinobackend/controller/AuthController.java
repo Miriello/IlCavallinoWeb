@@ -4,6 +4,7 @@ import com.example.ilcavallinobackend.model.dto.AutenticazioneResponse;
 import com.example.ilcavallinobackend.model.dto.LoginRequest;
 import com.example.ilcavallinobackend.model.dto.RegistrazioneRequest;
 import com.example.ilcavallinobackend.service.AutenticazioneService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +22,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AutenticazioneResponse> login (@RequestBody LoginRequest request){
+    public ResponseEntity<AutenticazioneResponse> login (@Valid @RequestBody LoginRequest request){
         return ResponseEntity.ok(autenticazioneService.login(request));
     }
 
     @PostMapping("/registrazione")
-    public ResponseEntity<AutenticazioneResponse> registrazione(@RequestBody RegistrazioneRequest request){
+    public ResponseEntity<AutenticazioneResponse> registrazione(@Valid @RequestBody RegistrazioneRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(autenticazioneService.registrazione(request));
     }
 }

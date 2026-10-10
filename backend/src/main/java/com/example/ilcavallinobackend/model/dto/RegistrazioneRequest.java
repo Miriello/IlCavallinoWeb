@@ -15,7 +15,7 @@ public class RegistrazioneRequest {
     public RegistrazioneRequest(){
 
     }
-    @NotBlank
+
     public String getUsername(){
         return username;
     }

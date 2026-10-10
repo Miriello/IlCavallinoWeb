@@ -3,20 +3,18 @@ package com.example.ilcavallinobackend.controller;
 import com.example.ilcavallinobackend.model.dto.CarrelloDTO;
 import com.example.ilcavallinobackend.model.entity.Utente;
 import com.example.ilcavallinobackend.service.CarrelloService;
-import com.example.ilcavallinobackend.service.UtenteService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
+@PreAuthorize("hasRole('USER')")
 @RestController
 @RequestMapping("api/carrello")
 public class CarrelloController {
     private final CarrelloService carrelloService;
-    private final UtenteService utenteService;
 
-    public CarrelloController(CarrelloService carrelloService, UtenteService utenteService){
+    public CarrelloController(CarrelloService carrelloService){
         this.carrelloService=carrelloService;
-        this.utenteService=utenteService;
     }
     @GetMapping
     public ResponseEntity<CarrelloDTO> getCarrello(@AuthenticationPrincipal Utente utente){
