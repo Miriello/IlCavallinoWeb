@@ -35,8 +35,8 @@ public class OrdineController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrdineDTO> getOrdine(@PathVariable long id){
-        OrdineDTO ordine = ordineService.getOrdine(id);
+    public ResponseEntity<OrdineDTO> getOrdine(@PathVariable long id, @AuthenticationPrincipal Utente utente){
+        OrdineDTO ordine = ordineService.getOrdine(id, utente);
         return ResponseEntity.ok(ordine);
     }
 

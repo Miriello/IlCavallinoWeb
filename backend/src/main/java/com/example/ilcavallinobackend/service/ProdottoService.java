@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonTrovatoExcepiton;
 import com.example.ilcavallinobackend.mapper.ProdottoMapper;
 import com.example.ilcavallinobackend.model.dto.IngredienteDTO;
 import com.example.ilcavallinobackend.model.entity.Ingrediente;
@@ -27,7 +28,7 @@ public class ProdottoService {
 
     @Transactional
     public ProdottoDTO getProdotto (long id){
-        return ProdottoMapper.toDTO(prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato")));
+        return ProdottoMapper.toDTO(prodottoRepository.findById(id).orElseThrow(()-> new NonTrovatoExcepiton("Prodotto non trovato")));
     }
 
     @Transactional
@@ -51,7 +52,7 @@ public class ProdottoService {
     }
     @Transactional
     public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO) {
-        Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
+        Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(() -> new NonTrovatoExcepiton("Prodotto non trovato"));
         ProdottoMapper.update(prodotto, prodottoDTO);
         prodotto.setIngredienti(recuperaIngredienti(prodottoDTO));
         return ProdottoMapper.toDTO(prodotto);
@@ -67,7 +68,7 @@ public class ProdottoService {
             return ingredienti;
         }
         for(IngredienteDTO ingredienteDTO : prodottoDTO.getIngredienti()){
-            Ingrediente ingrediente = ingredienteRepository.findById(ingredienteDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato"));
+            Ingrediente ingrediente = ingredienteRepository.findById(ingredienteDTO.getId()).orElseThrow(()-> new NonTrovatoExcepiton("Ingrediente non trovato"));
             ingredienti.add(ingrediente);
         }
         return ingredienti;

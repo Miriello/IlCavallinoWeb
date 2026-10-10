@@ -1,11 +1,11 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonPermessoException;
+import com.example.ilcavallinobackend.exception.NonTrovatoExcepiton;
+import com.example.ilcavallinobackend.exception.PermessoNegato;
 import com.example.ilcavallinobackend.mapper.OrdineMapper;
-import com.example.ilcavallinobackend.model.entity.Carrello;
-import com.example.ilcavallinobackend.model.entity.Ordine;
+import com.example.ilcavallinobackend.model.entity.*;
 import com.example.ilcavallinobackend.model.dto.OrdineDTO;
-import com.example.ilcavallinobackend.model.entity.RigaCarrello;
-import com.example.ilcavallinobackend.model.entity.Utente;
 import com.example.ilcavallinobackend.repository.CarrelloRepository;
 import com.example.ilcavallinobackend.repository.OrdineRepository;
 import com.example.ilcavallinobackend.repository.UtenteRepository;
@@ -49,8 +49,18 @@ public class OrdineService {
 
 
     @Transactional
-    public OrdineDTO getOrdine(long id){
-        return OrdineMapper.toDTO(ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non trovato")));
+    public OrdineDTO getOrdine(long id, Utente utente) {
+        Ordine ordine = ordineRepository.findById(id)
+                .orElseThrow(() ->
+                        new NonTrovatoExcepiton("Ordine non trovato")
+                );
+
+        if (utente.getRuolo() != Ruolo.ADMIN &&
+                ordine.getUtente().getId() != utente.getId()) {
+            throw new PermessoNegato("Accesso non autorizzato");
+        }
+
+        return OrdineMapper.toDTO(ordine);
     }
 
 
@@ -63,7 +73,7 @@ public class OrdineService {
     public OrdineDTO creaOrdine(Utente utente){
         Carrello carrello = carrelloRepository.attivaLock(utente);
         if(carrello.getElenco().isEmpty()){
-            throw new IllegalArgumentException("Il carrello è vuoto!");
+            throw new NonPermessoException("Il carrello è vuoto!");
         }
         Ordine ordine = new Ordine();
         ordine.setData(LocalDate.now());
@@ -83,7 +93,7 @@ public class OrdineService {
     }
     @Transactional
     public void eliminaOrdine(long id){
-        Ordine daCancellare = ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non presente"));
+        Ordine daCancellare = ordineRepository.findById(id).orElseThrow(()-> new NonTrovatoExcepiton("Ordine non presente"));
         ordineRepository.delete(daCancellare);
         ordineRepository.flush();
         carrelloRepository.deleteById(daCancellare.getCarrello().getId());

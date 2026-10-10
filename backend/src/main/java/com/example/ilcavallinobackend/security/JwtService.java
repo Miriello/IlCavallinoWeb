@@ -4,7 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.cglib.core.internal.Function;
+import java.util.function.Function;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,15 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-    private String chiave;
-    private long jwtExpirationMs;
+    private final String chiave;
+    private final long jwtExpirationMs;
+
+    public JwtService(
+            @Value("${application.security.jwt.secret-key}") String chiave,
+            @Value("${application.security.jwt.expiration-ms}") long jwtExpirationMs) {
+        this.chiave=chiave;
+        this.jwtExpirationMs=jwtExpirationMs;
+    }
 
     public String estraiUsername(String token){
         return estraiClaim(token, Claims::getSubject);
@@ -56,9 +64,9 @@ public class JwtService {
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
-    public boolean isTokenExpired(String token){
+    public boolean isTokenExpired(String token) {
         Date scadenza = estraiClaim(token, Claims::getExpiration);
-        return estraiClaim(token, Claims::getExpiration).before(new Date());
+        return scadenza.before(new Date());
     }
 
     private SecretKey getFirma () {

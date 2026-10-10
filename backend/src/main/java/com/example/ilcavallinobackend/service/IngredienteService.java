@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonTrovatoExcepiton;
 import com.example.ilcavallinobackend.mapper.AllergeneMapper;
 import com.example.ilcavallinobackend.mapper.IngredienteMapper;
 import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
@@ -34,7 +35,7 @@ public class IngredienteService {
     }
     @Transactional
     public IngredienteDTO getIngrediente(long id){
-        return IngredienteMapper.toDTO(ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato")));
+        return IngredienteMapper.toDTO(ingrendienteRepository.findById(id).orElseThrow(()-> new NonTrovatoExcepiton("Ingrediente non trovato")));
     }
     @Transactional
     public IngredienteDTO aggiungiIngrediente(IngredienteDTO ingredienteDTO){
@@ -44,7 +45,7 @@ public class IngredienteService {
     }
     @Transactional
     public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO) {
-        Ingrediente ingrediente = ingrendienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ingrediente non trovato"));
+        Ingrediente ingrediente = ingrendienteRepository.findById(id).orElseThrow(() -> new NonTrovatoExcepiton("Ingrediente non trovato"));
         IngredienteMapper.update(ingrediente, ingredienteDTO);
         ingrediente.setAllergeni(recuperaAllergeni(ingredienteDTO));
         return IngredienteMapper.toDTO(ingrendienteRepository.save(ingrediente));
@@ -60,7 +61,7 @@ public class IngredienteService {
             return allergeni;
         }
         for (AllergeneDTO allergeneDTO : ingredienteDTO.getAllergeni()){
-            Allergene allergene = allergeneRepository.findById(allergeneDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));
+            Allergene allergene = allergeneRepository.findById(allergeneDTO.getId()).orElseThrow(()-> new NonTrovatoExcepiton("Allergene non trovato"));
             allergeni.add(allergene);
         }
         return allergeni;

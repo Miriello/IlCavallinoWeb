@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonPermessoException;
 import com.example.ilcavallinobackend.model.dto.AutenticazioneResponse;
 import com.example.ilcavallinobackend.model.dto.LoginRequest;
 import com.example.ilcavallinobackend.model.dto.RegistrazioneRequest;
@@ -26,7 +27,7 @@ public class AutenticazioneService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    @Value("600")
+    @Value("${application.security.jwt.expiration-ms}")
     private long jwtExpirationMs;
 
     public AutenticazioneService(UtenteRepository utenteRepository,
@@ -59,10 +60,10 @@ public class AutenticazioneService {
     @Transactional
     public AutenticazioneResponse registrazione(RegistrazioneRequest request ){
         if(utenteRepository.existsByUsername(request.getUsername())){
-            throw new IllegalArgumentException("Username già presente");
+            throw new NonPermessoException("Username già presente");
         }
         if(utenteRepository.existsByEmail(request.getEmail())){
-            throw new IllegalArgumentException("Email già presente");
+            throw new NonPermessoException("Email già presente");
         }
         Utente utente = new Utente(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getEmail(), Ruolo.USER);
         Carrello carrello = carrelloRepository.save(new Carrello());

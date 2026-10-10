@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonTrovatoExcepiton;
 import com.example.ilcavallinobackend.mapper.AllergeneMapper;
 import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
 import com.example.ilcavallinobackend.model.entity.Allergene;
@@ -19,7 +20,7 @@ public class AllergeneService {
     }
 
     public AllergeneDTO getAllergene(long id){
-        return AllergeneMapper.toDTO(allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato")));
+        return AllergeneMapper.toDTO(allergeneRepository.findById(id).orElseThrow(()-> new NonTrovatoExcepiton("Allergene non trovato")));
     }
 
     public List<AllergeneDTO> getAllergeni(){
@@ -36,7 +37,7 @@ public class AllergeneService {
     }
     @Transactional
     public AllergeneDTO aggiornaAllergene(long id, AllergeneDTO allergeneDTO){
-        Allergene allergene = allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));
+        Allergene allergene = allergeneRepository.findById(id).orElseThrow(()-> new NonTrovatoExcepiton("Allergene non trovato"));
         AllergeneMapper.update(allergene, allergeneDTO);
         return AllergeneMapper.toDTO(allergene);
     }

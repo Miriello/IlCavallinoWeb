@@ -1,5 +1,7 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.exception.NonPermessoException;
+import com.example.ilcavallinobackend.exception.NonTrovatoExcepiton;
 import com.example.ilcavallinobackend.mapper.CarrelloMapper;
 import com.example.ilcavallinobackend.model.dto.CarrelloDTO;
 import com.example.ilcavallinobackend.model.entity.Carrello;
@@ -31,9 +33,9 @@ public class CarrelloService {
     @Transactional
     public CarrelloDTO aggiungiAlCarrello(Utente utente, long idProdotto, int unita){
         if(unita <= 0){
-            throw new IllegalArgumentException("La quantità non può essere negativa");
+            throw new NonPermessoException("La quantità deve essere maggiore di zero");
         }
-        Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
+        Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(() -> new NonTrovatoExcepiton("Prodotto non trovato"));
         Carrello carrello = carrelloRepository.attivaLock(utente);
         if(carrello.prodottoPresente(prodotto)){
            carrello.modificaQuantita(prodotto, carrello.getQuantitaProdotto(prodotto)+unita);
@@ -53,7 +55,7 @@ public class CarrelloService {
     @Transactional
     public CarrelloDTO rimuoviProdotto(Utente utente, long idProdotto){
         Carrello carrello = carrelloRepository.attivaLock(utente);
-        Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
+        Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new NonTrovatoExcepiton("Prodotto non trovato"));
         if(carrello.prodottoPresente(prodotto)){
             carrello.rimuoviRiga(prodotto);
             CarrelloDTO modificato = CarrelloMapper.toDTO(carrelloRepository.save(carrello));

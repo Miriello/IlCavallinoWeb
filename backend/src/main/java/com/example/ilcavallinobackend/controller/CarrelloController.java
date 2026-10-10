@@ -25,7 +25,7 @@ public class CarrelloController {
     }
 
     @PostMapping
-    public ResponseEntity<CarrelloDTO> aggiungiAlCarrello(@AuthenticationPrincipal Utente utente, long idProdotto, int quantita) {
+    public ResponseEntity<CarrelloDTO> aggiungiAlCarrello(@AuthenticationPrincipal Utente utente, @RequestParam long idProdotto, @RequestParam int quantita) {
         CarrelloDTO carrello =  carrelloService.aggiungiAlCarrello(utente, idProdotto, quantita);
         return ResponseEntity.ok(carrello);
     }
