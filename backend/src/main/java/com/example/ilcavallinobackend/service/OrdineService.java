@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.mapper.OrdineMapper;
 import com.example.ilcavallinobackend.model.entity.Carrello;
 import com.example.ilcavallinobackend.model.entity.Ordine;
 import com.example.ilcavallinobackend.model.dto.OrdineDTO;
@@ -31,7 +32,7 @@ public class OrdineService {
         List<Ordine> ordini = ordineRepository.findAll();
         List<OrdineDTO> ordiniDTO = new ArrayList<>();
         for(Ordine ordine: ordini){
-            ordiniDTO.add(toDTO(ordine));
+            ordiniDTO.add(OrdineMapper.toDTO(ordine));
         }
         return ordiniDTO;
     }
@@ -41,7 +42,7 @@ public class OrdineService {
         List<Ordine> ordini = ordineRepository.findByUtente(utente);
         List<OrdineDTO> ordiniDTO = new ArrayList<>();
         for(Ordine ordine: ordini){
-            ordiniDTO.add(toDTO(ordine));
+            ordiniDTO.add(OrdineMapper.toDTO(ordine));
         }
         return ordiniDTO;
     }
@@ -49,17 +50,9 @@ public class OrdineService {
 
     @Transactional
     public OrdineDTO getOrdine(long id){
-        return toDTO(ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non trovato")));
+        return OrdineMapper.toDTO(ordineRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ordine non trovato")));
     }
 
-    public OrdineDTO toDTO (Ordine ordine){
-        OrdineDTO ordineDTO = new OrdineDTO();
-        ordineDTO.setId(ordine.getId());
-        ordineDTO.setUsername(ordine.getUtente().getUsername());
-        ordineDTO.setData(ordine.getData());
-        ordineDTO.setCarrello(ordine.getCarrello());
-        return ordineDTO;
-    }
 
     // RECUPERO IL CARRELLO DALL'UTENTE E APPLICO UN LOCK PESSIMISTICO.
     // CREO UN NUOVO ORDINE, AL SUO INTERNO NON INSERISCO IL CARRELLO

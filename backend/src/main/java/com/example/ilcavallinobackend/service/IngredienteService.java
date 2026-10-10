@@ -19,8 +19,9 @@ public class IngredienteService {
     private IngrendienteRepository ingrendienteRepository;
     private AllergeneRepository allergeneRepository;
 
-    public IngredienteService(IngrendienteRepository ingrendienteRepository){
+    public IngredienteService(IngrendienteRepository ingrendienteRepository, AllergeneRepository allergeneRepository){
         this.ingrendienteRepository=ingrendienteRepository;
+        this.allergeneRepository=allergeneRepository;
     }
     @Transactional
     public List<IngredienteDTO> getIngredienti(){
@@ -56,7 +57,7 @@ public class IngredienteService {
     private List<Allergene> recuperaAllergeni(IngredienteDTO ingredienteDTO){
         List<Allergene> allergeni = new ArrayList<>();
         if(ingredienteDTO.getAllergeni()==null){
-            return List.of();
+            return allergeni;
         }
         for (AllergeneDTO allergeneDTO : ingredienteDTO.getAllergeni()){
             Allergene allergene = allergeneRepository.findById(allergeneDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));

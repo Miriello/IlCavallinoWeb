@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.mapper.CarrelloMapper;
 import com.example.ilcavallinobackend.model.dto.CarrelloDTO;
 import com.example.ilcavallinobackend.model.entity.Carrello;
 import com.example.ilcavallinobackend.model.entity.Prodotto;
@@ -24,7 +25,7 @@ public class CarrelloService {
 
     @Transactional
     public CarrelloDTO trovaCarrello(Utente utente){
-       return toDTO(carrelloRepository.findByUtente(utente));
+       return CarrelloMapper.toDTO(carrelloRepository.findByUtente(utente));
     }
 
     @Transactional
@@ -45,7 +46,7 @@ public class CarrelloService {
             carrello.aggiungiRiga(rg);
         }
         Carrello nuovo = carrelloRepository.save(carrello);
-        CarrelloDTO nuovoDTO = toDTO(nuovo);
+        CarrelloDTO nuovoDTO = CarrelloMapper.toDTO(nuovo);
         return nuovoDTO;
     }
 
@@ -55,26 +56,18 @@ public class CarrelloService {
         Prodotto prodotto = prodottoRepository.findById(idProdotto).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
         if(carrello.prodottoPresente(prodotto)){
             carrello.rimuoviRiga(prodotto);
-            CarrelloDTO modificato = toDTO(carrelloRepository.save(carrello));
+            CarrelloDTO modificato = CarrelloMapper.toDTO(carrelloRepository.save(carrello));
             return modificato;
         }
         else {
-            return toDTO(carrello);
+            return CarrelloMapper.toDTO(carrello);
         }
     }
     @Transactional
     public CarrelloDTO svuotaCarrello(Utente utente){
         Carrello carrello= carrelloRepository.attivaLock(utente);
         carrello.getElenco().clear();
-        return toDTO(carrelloRepository.save(carrello));
+        return CarrelloMapper.toDTO(carrelloRepository.save(carrello));
     }
 
-
-    public CarrelloDTO toDTO(Carrello carrello){
-        CarrelloDTO carrelloDTO = new CarrelloDTO();
-        carrelloDTO.setId(carrello.getId());
-        carrelloDTO.setElenco(carrello.getElenco());
-        carrelloDTO.setUsername(carrello.getUtente().getUsername());
-        return carrelloDTO;
-    }
 }

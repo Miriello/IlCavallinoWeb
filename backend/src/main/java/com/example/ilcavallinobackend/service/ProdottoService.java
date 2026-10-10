@@ -1,10 +1,13 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.mapper.ProdottoMapper;
 import com.example.ilcavallinobackend.model.dto.IngredienteDTO;
 import com.example.ilcavallinobackend.model.entity.Ingrediente;
 import com.example.ilcavallinobackend.model.entity.Prodotto;
 import com.example.ilcavallinobackend.model.dto.ProdottoDTO;
 import com.example.ilcavallinobackend.repository.ProdottoRepository;
+import com.example.ilcavallinobackend.repository.IngrendienteRepository;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +18,16 @@ import java.util.List;
 public class ProdottoService {
 
     private final ProdottoRepository prodottoRepository;
+    private final IngrendienteRepository ingredienteRepository;
 
-    public ProdottoService(ProdottoRepository prodottoRepository){
+    public ProdottoService(ProdottoRepository prodottoRepository, IngrendienteRepository ingredienteRepository){
         this.prodottoRepository=prodottoRepository;
+        this.ingredienteRepository=ingredienteRepository;
     }
 
     @Transactional
     public ProdottoDTO getProdotto (long id){
-        return toDTO(prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato")));
+        return ProdottoMapper.toDTO(prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato")));
     }
 
     @Transactional
@@ -31,53 +36,40 @@ public class ProdottoService {
         List<ProdottoDTO> prodottiDTO = new ArrayList<>();
         for(Prodotto p : prodotti){
             ProdottoDTO prodottoDTO = new ProdottoDTO();
-            prodottoDTO = toDTO(p);
+            prodottoDTO = ProdottoMapper.toDTO(p);
             prodottiDTO.add(prodottoDTO);
         }
         return prodottiDTO;
     }
 
-    public ProdottoDTO toDTO(Prodotto prodotto) {
-        ProdottoDTO pr = new ProdottoDTO();
-        pr.setId(prodotto.getId());
-        pr.setNome(prodotto.getNome());
-        pr.setCategoriaProdotto(prodotto.getCategoriaProdotto());
-        pr.setDescrizione(prodotto.getDescrizione());
-        pr.setPrezzo(prodotto.getPrezzo());
-        List<IngredienteDTO> ingredientiDTO = new ArrayList<>();
-        for( Ingrediente ingrediente: prodotto.getIngredienti() ){
-            IngredienteDTO ingredienteDTO = new IngredienteDTO();
-            ingredienteDTO.set
-        }
-        pr.setUrlImg(prodotto.getUrlImg());
-        return pr;
-    }
 
     @Transactional
     public ProdottoDTO creaProdotto(ProdottoDTO prodottoDTO){
-        Prodotto nuovo = new Prodotto();
-        nuovo.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
-        nuovo.setDescrizione(prodottoDTO.getDescrizione());
-        nuovo.setPrezzo(prodottoDTO.getPrezzo());
-        nuovo.setNome(prodottoDTO.getNome());
-        nuovo.setUrlImg(prodottoDTO.getUrlImg());
-        nuovo.setIngredienti(prodottoDTO.getIngredienti());
-        return toDTO(prodottoRepository.save(nuovo));
+        Prodotto prodotto = ProdottoMapper.toEntity(prodottoDTO);
+        prodotto.setIngredienti(recuperaIngredienti(prodottoDTO));
+        return ProdottoMapper.toDTO(prodottoRepository.save(prodotto));
     }
     @Transactional
-    public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO){
-        Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Prodotto non trovato"));
-        prodotto.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
-        prodotto.setPrezzo(prodottoDTO.getPrezzo());
-        prodotto.setDescrizione(prodottoDTO.getDescrizione());
-        prodotto.setIngredienti(prodottoDTO.getIngredienti());
-        prodotto.setNome(prodottoDTO.getNome());
-        prodotto.setUrlImg(prodottoDTO.getUrlImg());
-        return toDTO(prodottoRepository.save(prodotto));
+    public ProdottoDTO aggiornaProdotto(long id, ProdottoDTO prodottoDTO) {
+        Prodotto prodotto = prodottoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato"));
+        ProdottoMapper.update(prodotto, prodottoDTO);
+        prodotto.setIngredienti(recuperaIngredienti(prodottoDTO));
+        return ProdottoMapper.toDTO(prodotto);
     }
-
     @Transactional
     public void eliminaProdotto(long id){
         prodottoRepository.deleteById(id);
+    }
+
+    private List<Ingrediente> recuperaIngredienti(ProdottoDTO prodottoDTO){
+        List<Ingrediente> ingredienti = new ArrayList<>();
+        if(prodottoDTO.getIngredienti() == null ){
+            return ingredienti;
+        }
+        for(IngredienteDTO ingredienteDTO : prodottoDTO.getIngredienti()){
+            Ingrediente ingrediente = ingredienteRepository.findById(ingredienteDTO.getId()).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato"));
+            ingredienti.add(ingrediente);
+        }
+        return ingredienti;
     }
 }

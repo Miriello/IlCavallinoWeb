@@ -7,7 +7,9 @@ public class CarrelloMapper {
     public static CarrelloDTO toDTO(Carrello carrello){
         CarrelloDTO carrelloDTO = new CarrelloDTO();
         carrelloDTO.setId(carrello.getId());
-        carrelloDTO.setUsername(carrello.getUtente().getUsername());
+        if(carrello.getUtente() != null){
+            carrelloDTO.setUsername(carrello.getUtente().getUsername());
+        }
         carrelloDTO.setElenco(carrello.getElenco().stream().map(RigaCarrelloMapper::toDTO).toList());
         return carrelloDTO;
     }

@@ -23,7 +23,6 @@ public class ProdottoMapper {
         prodotto.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
         prodotto.setDescrizione(prodottoDTO.getDescrizione());
         prodotto.setPrezzo(prodottoDTO.getPrezzo());
-        prodotto.setIngredienti(prodottoDTO.getIngredienti().stream().map(IngredienteMapper::toEntity).toList());
         prodotto.setUrlImg(prodottoDTO.getUrlImg());
         return prodotto;
     }
@@ -33,7 +32,6 @@ public class ProdottoMapper {
         prodotto.setCategoriaProdotto(prodottoDTO.getCategoriaProdotto());
         prodotto.setDescrizione(prodottoDTO.getDescrizione());
         prodotto.setPrezzo(prodottoDTO.getPrezzo());
-        prodotto.setIngredienti(prodottoDTO.getIngredienti().stream().map(IngredienteMapper::toEntity).toList());
         prodotto.setUrlImg(prodottoDTO.getUrlImg());
     }
 }
