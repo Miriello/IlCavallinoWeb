@@ -79,7 +79,7 @@ public class OrdineService {
         carrelloRepository.save(nuovoCarrello);
         ordine.setCarrello(nuovoCarrello);
         carrello.getElenco().clear();
-        return toDTO(ordineRepository.save(ordine));
+        return OrdineMapper.toDTO(ordineRepository.save(ordine));
     }
     @Transactional
     public void eliminaOrdine(long id){

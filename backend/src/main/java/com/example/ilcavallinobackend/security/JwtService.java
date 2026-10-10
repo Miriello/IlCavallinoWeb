@@ -17,7 +17,7 @@ import java.util.Map;
 public class JwtService {
 
     private String chiave;
-    private long jwtScadenzaMs;
+    private long jwtExpirationMs;
 
     public String estraiUsername(String token){
         return estraiClaim(token, Claims::getSubject);
@@ -46,7 +46,7 @@ public class JwtService {
                 .claims(extraClaims) //CLAIM AGGIUNTI DA NOI
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(adesso))
-                .expiration(new Date(adesso + jwtScadenzaMs))
+                .expiration(new Date(adesso + jwtExpirationMs))
                 .signWith(getFirma())
                 .compact();
     }
