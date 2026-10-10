@@ -1,5 +1,6 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.mapper.AllergeneMapper;
 import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
 import com.example.ilcavallinobackend.model.entity.Allergene;
 import com.example.ilcavallinobackend.repository.AllergeneRepository;
@@ -18,13 +19,13 @@ public class AllergeneService {
     }
 
     public AllergeneDTO getAllergene(long id){
-        return toDTO(allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato")));
+        return AllergeneMapper.toDTO(allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato")));
     }
 
     public List<AllergeneDTO> getAllergeni(){
         List<AllergeneDTO> allergeni = new ArrayList<>();
         for(Allergene a : allergeneRepository.findAll()){
-            allergeni.add(toDTO(a));
+            allergeni.add(AllergeneMapper.toDTO(a));
         }
         return allergeni;
     }
@@ -32,25 +33,18 @@ public class AllergeneService {
     public AllergeneDTO aggiungiAllergene(AllergeneDTO allergeneDTO){
         Allergene nuovo = new Allergene();
         nuovo.setNome(allergeneDTO.getNome());
-        return toDTO(allergeneRepository.save(nuovo));
+        return AllergeneMapper.toDTO(allergeneRepository.save(nuovo));
     }
     @Transactional
     public AllergeneDTO aggiornaAllergene(long id, AllergeneDTO allergeneDTO){
         Allergene allergene = allergeneRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Allergene non trovato"));
-        allergene.setNome(allergeneDTO.getNome());
-        return toDTO(allergeneRepository.save(allergene));
+        AllergeneMapper.update(allergene, allergeneDTO);
+        return AllergeneMapper.toDTO(allergene);
     }
 
     @Transactional
     public void eliminaAllergene(long id){
         allergeneRepository.deleteById(id);
-    }
-
-    public AllergeneDTO toDTO (Allergene allergene){
-        AllergeneDTO allergeneDTO = new AllergeneDTO();
-        allergeneDTO.setId(allergene.getId());
-        allergeneDTO.setNome(allergene.getNome());
-        return allergeneDTO;
     }
 
 }

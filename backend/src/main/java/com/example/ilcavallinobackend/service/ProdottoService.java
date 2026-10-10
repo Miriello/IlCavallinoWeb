@@ -1,5 +1,7 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.model.dto.IngredienteDTO;
+import com.example.ilcavallinobackend.model.entity.Ingrediente;
 import com.example.ilcavallinobackend.model.entity.Prodotto;
 import com.example.ilcavallinobackend.model.dto.ProdottoDTO;
 import com.example.ilcavallinobackend.repository.ProdottoRepository;
@@ -42,7 +44,11 @@ public class ProdottoService {
         pr.setCategoriaProdotto(prodotto.getCategoriaProdotto());
         pr.setDescrizione(prodotto.getDescrizione());
         pr.setPrezzo(prodotto.getPrezzo());
-        pr.setIngredienti(prodotto.getIngredienti());
+        List<IngredienteDTO> ingredientiDTO = new ArrayList<>();
+        for( Ingrediente ingrediente: prodotto.getIngredienti() ){
+            IngredienteDTO ingredienteDTO = new IngredienteDTO();
+            ingredienteDTO.set
+        }
         pr.setUrlImg(prodotto.getUrlImg());
         return pr;
     }

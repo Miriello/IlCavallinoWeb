@@ -1,6 +1,10 @@
 package com.example.ilcavallinobackend.service;
 
+import com.example.ilcavallinobackend.mapper.AllergeneMapper;
+import com.example.ilcavallinobackend.mapper.IngredienteMapper;
+import com.example.ilcavallinobackend.model.dto.AllergeneDTO;
 import com.example.ilcavallinobackend.model.dto.IngredienteDTO;
+import com.example.ilcavallinobackend.model.entity.Allergene;
 import com.example.ilcavallinobackend.model.entity.Ingrediente;
 import com.example.ilcavallinobackend.repository.IngrendienteRepository;
 import jakarta.transaction.Transactional;
@@ -21,40 +25,27 @@ public class IngredienteService {
         List<Ingrediente> ingredienti = ingrendienteRepository.findAll();
         List<IngredienteDTO> ingredientiDTO = new ArrayList<>();
         for(Ingrediente i : ingredienti){
-            ingredientiDTO.add(toDTO(i));
+            ingredientiDTO.add(IngredienteMapper.toDTO(i));
         }
         return ingredientiDTO;
     }
     @Transactional
     public IngredienteDTO getIngrediente(long id){
-        return toDTO(ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato")));
+        return IngredienteMapper.toDTO(ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato")));
     }
     @Transactional
     public IngredienteDTO aggiungiIngrediente(IngredienteDTO ingredienteDTO){
-        Ingrediente nuovo = new Ingrediente();
-        nuovo.setAllergeni(ingredienteDTO.getAllergeni());
-        nuovo.setNome(ingredienteDTO.getNome());
-        nuovo.setScadenza(ingredienteDTO.getScadenza());
-        return toDTO(ingrendienteRepository.save(nuovo));
+        return IngredienteMapper.toDTO(ingrendienteRepository.save(IngredienteMapper.toEntity(ingredienteDTO)));
     }
     @Transactional
     public IngredienteDTO aggiornaIngrediente(long id, IngredienteDTO ingredienteDTO){
         Ingrediente ingrediente= ingrendienteRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Ingrediente non trovato"));
-        ingrediente.setAllergeni(ingredienteDTO.getAllergeni());
-        ingrediente.setNome(ingredienteDTO.getNome());
-        ingrediente.setScadenza(ingredienteDTO.getScadenza());
-        return toDTO(ingrendienteRepository.save(ingrediente));
+        IngredienteMapper.update(ingrediente, ingredienteDTO);
+        return IngredienteMapper.toDTO(ingrendienteRepository.save(ingrediente));
     }
     @Transactional
     public void eliminaIngrediente(long id){
         ingrendienteRepository.deleteById(id);
     }
-    public IngredienteDTO toDTO(Ingrediente ingrediente){
-        IngredienteDTO ingredienteDTO = new IngredienteDTO();
-        ingredienteDTO.setId(ingrediente.getId());
-        ingredienteDTO.setNome(ingrediente.getNome());
-        ingredienteDTO.setScadenza(ingrediente.getScadenza());
-        ingredienteDTO.setAllergeni(ingrediente.getAllergeni());
-        return ingredienteDTO;
-    }
+
 }

@@ -26,6 +26,6 @@ public class RegistrazioneRequest {
 
 
     public String getEmail(){
-        return password;
+        return email;
     }
 }
