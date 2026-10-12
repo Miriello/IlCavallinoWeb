@@ -14,7 +14,7 @@ export class AllergeneService {
     }
 
     getAllergene(id:number):Observable<Allergene>{
-        return this.http.get<Allergene>('${this.apiUrl}/${id}');
+        return this.http.get<Allergene>(`${this.apiUrl}/${id}`);
     }
 
     creaAllergene(allergene: Allergene){
@@ -22,10 +22,10 @@ export class AllergeneService {
     }
 
     modificaAllergene(id:number, allergene:Allergene):Observable<Allergene>{ 
-        return this.http.put<Allergene>('${this.apiUrl}/${id}',allergene);
+        return this.http.put<Allergene>(`${this.apiUrl}/${id}`,allergene);
     }
 
     eliminaAllergene(id:number):Observable<void>{
-        return this.http.delete<void>('${this.apiUrl}/${id}');
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 }

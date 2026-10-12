@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, Service } from '@angular/core';
 import { RigaCarrello } from '../models/rigaCarrello';
-import { Carrello } from '../pages/carrello/carrello';
+import { Carrello } from '../models/carrello';
 import { Observable } from 'rxjs';
 
 @Service()
@@ -14,6 +14,6 @@ export class CarrelloService {
     }
 
     aggiungiAlCarrello(id:number, quantita:number):Observable<Carrello>{
-        return this.http.post<Carrello>('${this.apiUrl}/${id}')
+        return this.http.post<Carrello>(`${this.apiUrl}/${id}`);
     }
 }

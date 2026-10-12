@@ -13,7 +13,7 @@ export class ProdottoService {
     }
 
     getProdotto(id:number): Observable<Prodotto>{
-        return this.http.get<Prodotto>('${this.apiUrl}/${id}');
+        return this.http.get<Prodotto>(`${this.apiUrl}/${id}`);
     }
 
     creaProdotto(prodotto: Prodotto): Observable<Prodotto>{
@@ -25,6 +25,6 @@ export class ProdottoService {
     }
 
     eliminaProdotto(id:number):Observable<void>{
-        return this.http.delete<void>('${this.apiUrl}/${id}');
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 }

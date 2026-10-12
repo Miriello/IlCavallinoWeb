@@ -14,7 +14,7 @@ export class IngredienteService {
     }
 
     getIngrediente(id:number):Observable<Ingrediente>{
-        return this.http.get<Ingrediente>('${this.apiUrl}/${id}');
+        return this.http.get<Ingrediente>(`${this.apiUrl}/${id}`);
     }
 
 
@@ -23,10 +23,10 @@ export class IngredienteService {
     }
 
     modificaIngrediente(id:number, ingrediente:Ingrediente):Observable<Ingrediente>{
-        return this.http.put<Ingrediente>('${this.apiUrl}/${id}',ingrediente);
+        return this.http.put<Ingrediente>(`${this.apiUrl}/${id}`,ingrediente);
     }
 
     eliminaIngrediente(id:number):Observable<void>{
-        return this.http.delete<void>('${this.apiUrl}/${id}');
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 }

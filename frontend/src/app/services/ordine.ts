@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Service } from '@angular/core';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Ordine } from '../models/ordine';
 
 @Service()
-export class Ordine {
+export class OrdineService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = 'http://localhost:8080/api/ordini';
 
@@ -13,7 +14,7 @@ export class Ordine {
     }
 
     getOrdine(id:number):Observable<Ordine>{
-        return this.http.get<Ordine>('${this.apiUrl}/${id}');
+        return this.http.get<Ordine>(`${this.apiUrl}/${id}`);
     }
 
 }
