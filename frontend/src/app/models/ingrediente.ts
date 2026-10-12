@@ -1,4 +1,4 @@
-import { Allergene } from "../services/allergene";
+import { Allergene } from "./allergene";
 
 export interface Ingrediente {
     "id":number;

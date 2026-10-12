@@ -1,5 +1,5 @@
 import { CurrencyPipe } from "@angular/common";
-import { Prodotto } from "../services/prodotto";
+import { Prodotto } from "./prodotto";
 
 export interface RigaCarrello{
     "prodottoDTO" : Prodotto,

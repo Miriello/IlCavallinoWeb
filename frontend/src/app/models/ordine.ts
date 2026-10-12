@@ -1,4 +1,4 @@
-import { Carrello } from "../services/carrello";
+import { Carrello } from "./carrello";
 
 export interface Ordine {
     "id":number,
