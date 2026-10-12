@@ -1,15 +1,19 @@
 import { RouterPreloader } from "@angular/router";
 import { Ingrediente } from "./ingrediente";
 
-export enum Ruolo{
-    USER = 'USER' ,
-    ADMIN = 'ADMIN'
-} 
+export enum CategoriaProdotto{
+    PRIMO = 'PRIMO',
+    SECONDO = 'SECONDO',
+    CONTORNO = 'CONTORNO',
+    ROSTICCERIA = 'ROSTICCERIA',
+    BIBITE = 'BIBITE',
+    ALCOLICI = 'ALCOLICI'
+}
 
 export interface Prodotto {
     "id":number,
     "nome": string,
-    "categoriaProdotto": Ruolo,
+    "categoriaProdotto": CategoriaProdotto,
     "descrizione":string,
     "prezzo":number,
     "ingredienti":Ingrediente[],

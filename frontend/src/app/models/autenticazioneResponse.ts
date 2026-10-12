@@ -1,4 +1,7 @@
-import { Ruolo } from "./prodotto";
+export enum Ruolo{
+    USER = 'USER' ,
+    ADMIN = 'ADMIN'
+} 
 
 export interface AutenticazioneResponse{
     "token":string,
