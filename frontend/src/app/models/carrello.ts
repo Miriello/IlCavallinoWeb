@@ -1,8 +1,7 @@
-import { Prodotto } from "./prodotto";
-import { RigaCarrello } from "./rigaCarrello";
+import { RigaCarrello } from "./rigaCarrello"
 
 export interface Carrello {
-    id: number;
-    righeCarrello: RigaCarrello[];
-    utente: string;
+    "id":number,
+    "username":string,
+    "elenco": RigaCarrello[]
 }

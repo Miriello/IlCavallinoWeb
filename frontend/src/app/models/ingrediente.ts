@@ -1,8 +1,8 @@
-import { Allergene } from './allergene';
+import { Allergene } from "../services/allergene";
 
 export interface Ingrediente {
-    id: number;
-    nome: string; 
-    allergeni: Allergene[];
-    scadenza: Date;
+    "id":number;
+    "nome":string,
+    "scadenza":Date,
+    "allergeni": Allergene[]
 }

@@ -1,11 +1,13 @@
-import { Ingrediente } from "../components/ingrediente/ingrediente";
+import { RouterPreloader } from "@angular/router";
+import { Ingrediente } from "../services/ingrediente";
+
+export enum Ruolo{
+    USER = 'USER' ,
+    ADMIN = 'ADMIN'
+} 
 
 export interface Prodotto {
-    id: number;
-    nome: string;
-    descrizione: string;
-    categoriaProdotto: Enumerator;
-    prezzo: number;
-    ingredienti: Ingrediente[];
-    immagineUrl: string;
+    "id":number,
+    "nome": string,
+    "categoriaProdotto": Ruolo
 }

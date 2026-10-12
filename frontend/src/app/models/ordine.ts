@@ -1,9 +1,8 @@
-import { Utente } from './utente';
-import { Carrello } from './carrello';
+import { Carrello } from "../services/carrello";
 
 export interface Ordine {
-    id: number;
-    utente: string;
-    data: Date;
-    carrello: Carrello;
+    "id":number,
+    "username":string,
+    "data": Date,
+    "carrelloDTO":Carrello
 }
