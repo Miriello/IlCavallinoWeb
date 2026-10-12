@@ -1,4 +1,3 @@
-import { RouterPreloader } from "@angular/router";
 import { Ingrediente } from "./ingrediente";
 
 export enum CategoriaProdotto{
