@@ -1,0 +1,76 @@
+.homepage {
+  min-height: 100vh;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 70px 8%;
+  background: white;
+}
+
+.hero-testo {
+  max-width: 540px;
+}
+
+.etichetta {
+  color: var(--rosso);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 4vw, 60px);
+  line-height: 1.1;
+  margin: 20px 0;
+}
+
+.hero p {
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.pulsante-menu {
+  display: inline-block;
+  padding: 14px 25px;
+  background: var(--rosso);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.hero-immagine img {
+  width: 700px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.presentazione {
+  text-align: center;
+  padding: 15px 15px;
+}
+
+.presentazione p {
+  color: #666;
+}
+
+.presentazione a {
+  color: var(--rosso);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 40px 6%;
+  }
+
+  .hero-immagine img {
+    height: 260px;
+  }
+}

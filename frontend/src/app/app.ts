@@ -7,6 +7,7 @@ import { Ruolo } from './models/autenticazioneResponse';
 import { NavbarPubblica } from './components/navbar-pubblica/navbar-pubblica';
 import { NavbarUser } from './components/navbar-user/navbar-user';
 import { NavbarAdmin } from './components/navbar-admin/navbar-admin';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { NavbarAdmin } from './components/navbar-admin/navbar-admin';
     RouterOutlet,
     NavbarPubblica,
     NavbarUser,
-    NavbarAdmin
+    NavbarAdmin,
+    Footer
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

@@ -26,12 +26,12 @@
 .navbar-links a {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   padding: 8px 0;
 }
 
-.navbar-links a:hover,
+
 .navbar-links a.active {
   border-bottom: 2px solid white;
 }

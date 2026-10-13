@@ -1,0 +1,49 @@
+.footer {
+  background: #202020;
+  color: white;
+  padding: 45px 8% 15px;
+}
+
+.footer-contenuto {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 35px;
+}
+
+.footer h3 {
+  color: white;
+  font-size: 22px;
+}
+
+.footer h4 {
+  color: white;
+}
+
+.footer p,
+.footer a {
+  color: #cccccc;
+  font-size: 14px;
+}
+
+.footer a {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.footer a:hover {
+  color: white;
+}
+
+.footer-finale {
+  border-top: 1px solid #444;
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .footer-contenuto {
+    grid-template-columns: 1fr;
+  }
+}
