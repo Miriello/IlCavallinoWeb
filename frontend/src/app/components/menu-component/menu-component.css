@@ -26,7 +26,7 @@
 }
 
 .menu-tabs button.active {
-    background-color: #198754;
+    background-color: var(--rosso);
     border-color: #198754;
 }
 .menu-grid {

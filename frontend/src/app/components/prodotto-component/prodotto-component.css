@@ -1,6 +1,6 @@
 
 .prodotto-component {
-    background-color: #111217;
+    background-color: var(--rosso);
     color: white;
     border-radius: 18px;
     padding: 24px;
@@ -25,7 +25,6 @@
 }
 
 .prodotto_info {
-    color: #aaaaaa;
     line-height: 1.6;
 }
 

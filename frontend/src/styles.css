@@ -1,15 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --rosso: #f00000;
+  --rosso-hover: #cf0000;
+
+  --bianco: #ffffff;
+  --sfondo: #f6f6f6;
+  --testo: #171717;
+  --testo-secondario: #666666;
+  --bordo: #e8e8e8;
+
+  --raggio: 10px;
+  --ombra: 0 4px 16px rgba(0, 0, 0, 0.07);
+
+  --font-principale: 'Roboto', Arial, sans-serif;
+}
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
+body {
+  margin: 0;
+  font-family: var(--font-principale);
+  background: var(--sfondo);
+  color: var(--testo);
 }
 
-button, input, textarea, select {
-    font: inherit;
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }

@@ -2,7 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Prodotto } from '../../models/prodotto';
 import { ProdottoService } from '../../services/prodotto';
 import { MenuComponent } from '../../components/menu-component/menu-component';
-import { CategoriaProdotto } from '../../models/prodotto';
 
 @Component({
   selector: 'app-menu',

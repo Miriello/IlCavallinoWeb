@@ -1,54 +1,46 @@
 .nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #111217;
-    padding: 18px 32px;
-    min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 5%;
+  min-height: 76px;
+
+  background: var(--rosso);
+  color: white;
 }
 
 .logo {
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
+  font-size: 25px;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
 }
 
 .navbar-links {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .navbar-links a {
-    color: #cccccc;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 0;
 }
 
-.navbar-links a:hover {
-    color: white;
+.navbar-links a:hover,
+.navbar-links a.active {
+  border-bottom: 2px solid white;
 }
 
-.navbar-links .registrati {
-    background-color: #198754;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-}
 .navbar-links button {
-    background-color: #198754;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.navbar-links .logout {
-    background-color: #198754;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
+  background: white;
+  color: var(--rosso);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 700;
 }
