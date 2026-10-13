@@ -1,6 +1,6 @@
 <div class="menu-grid">
     @for (prodotto of prodotti(); track prodotto.id) {
-        <app-prodotto-card
+        <app-prodotto-component
             [prodotto]="prodotto"
             (aggiungi)="aggiungiAlCarrello($event)"
         />
