@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AutenticazioneService } from '../../services/autenticazione';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,23 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.css'
 })
 export class Login {
+  private AutenticazioneService = inject(AutenticazioneService);
+  errore = '';
   username = '';
   password = '';
 
   accedi(): void {
-    console.log('Username:', this.username);
-    console.log('Password inserita:', !!this.password);
+    this.AutenticazioneService.login({
+      username : this.username,
+      password : this.password
+    }).subscribe({
+      next:(risposta) => {
+        console.log('Login riuscito: ', risposta.username);
+        console.log('Ruolo: ', risposta.ruolo);
+      },
+      error: () => {
+        this.errore='Credenziali non valide';
+      }
+    });
   }
 }

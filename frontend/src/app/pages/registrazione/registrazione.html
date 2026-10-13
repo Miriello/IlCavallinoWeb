@@ -32,7 +32,8 @@
         >
 
         <button type="submit">Registrati</button>
-
+        @if (messaggio) {<p class="successo">{{ messaggio }}</p>}
+        @if (errore) {<p class="errore">{{ errore }}</p>}
         <p>
             Hai già un account?
             <a routerLink="/login">Accedi</a>

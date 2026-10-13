@@ -85,6 +85,13 @@
 .registrazione-page a:hover {
     text-decoration: underline;
 }
+.registrazione-page .successo {
+    color: #35c987;
+}
+
+.registrazione-page .errore {
+    color: #ff7777;
+}
 
 @media (max-width: 480px) {
     .registrazione-page form {
