@@ -13,6 +13,7 @@ export class AutenticazioneService {
     private readonly apiUrl = 'http://localhost:8080/api/autenticazione';
     private readonly utenteSignal = signal<AutenticazioneResponse | null> (null);
     readonly utenteAutenticato = this.utenteSignal.asReadonly();
+    private scadenzaToken = 0;
 
     login(request: LoginRequest): Observable<AutenticazioneResponse> {
         return this.http.post<AutenticazioneResponse>(
@@ -30,10 +31,25 @@ export class AutenticazioneService {
     }
 
     impostaAutenticazione(risposta: AutenticazioneResponse): void {
+        this.scadenzaToken=Date.now() + risposta.expireMs;
+        const sessione: Sessione = {
+            autenticazione: risposta,
+            scadenza: this.scadenzaToken
+        };
+        
         this.utenteSignal.set(risposta);
     }
 
     logout(): void {
         this.utenteSignal.set(null);
+        this.scadenzaToken=0;
+    }
+
+    tokenValido(): boolean{
+        const utente = this.utenteSignal();
+        if(!utente || !utente.token){
+            return false;
+        }
+        return Date.now() < this.scadenzaToken;
     }
 }

@@ -21,11 +21,16 @@ export class Login {
       username : this.username,
       password : this.password
     }).subscribe({
-      next:(risposta) => {
+      next: async (risposta) => {
         this.autenticazioneService.impostaAutenticazione(risposta);
         console.log('Login riuscito: ', risposta.username);
         console.log('Ruolo: ', risposta.ruolo);
-        this.router.navigate(['/menu']);
+        if(risposta.ruolo== 'USER'){
+          this.router.navigate(['/menu']);
+        }
+        if(risposta.ruolo == 'ADMIN'){
+          this.router.navigate(['/dashborad']);
+        }
       },
       error: () => {
         this.errore='Credenziali non valide';
