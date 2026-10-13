@@ -16,7 +16,7 @@
 
 </div>
 <div class="menu-grid">
-    @for (prodotto of prodotti(); track prodotto.id) {
+    @for (prodotto of prodottiFiltrati(); track prodotto.id) {
         <app-prodotto-component
             [prodotto]="prodotto"
             (aggiungi)="aggiungiAlCarrello($event)"

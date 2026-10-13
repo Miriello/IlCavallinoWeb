@@ -14,28 +14,30 @@ export class Menu implements OnInit {
 
   private prodottoService = inject(ProdottoService);
 
-  //prodotti = signal<Prodotto[]>([]);
+  prodotti = signal<Prodotto[]>([]);
   caricamento = signal(true);
   errore = signal(false);
 
-  ngOnInit(): void {
-    this.prodottoService.getProdotti().subscribe({
-      next: (prodotti) => {
-        this.prodotti.set(prodotti);
-        this.caricamento.set(false);
-      },
-      error: () => {
-        this.errore.set(true);
-        this.caricamento.set(false);
-      }
-    });
-  }
+ngOnInit(): void {
+  this.prodottoService.getProdotti().subscribe({
+    next: (prodotti) => {
+      console.log('Prodotti ricevuti:', prodotti);
+      this.prodotti.set(prodotti);
+      this.caricamento.set(false);
+    },
+    error: (errore) => {
+      console.error('Errore chiamata API:', errore);
+      this.errore.set(true);
+      this.caricamento.set(false);
+    }
+  });
+}
 
   aggiungiAlCarrello(idProdotto: number): void {
     console.log('Prodotto selezionato:', idProdotto);
   }
 
-  prodotti = signal<Prodotto[]>([
+  /*prodotti = signal<Prodotto[]>([
   {
     id: 1,
     nome: 'Pizza Margherita',
@@ -64,4 +66,5 @@ export class Menu implements OnInit {
     urlImg: 'https://images.unsplash.com/photo-1513104890138-7c749659a591'
   }
 ]);
+*/
 }

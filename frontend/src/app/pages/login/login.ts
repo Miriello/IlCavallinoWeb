@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-login',
-  styleUrl: './login.css',
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
+  styleUrl: './login.css'
 })
-export class Login {}
+export class Login {
+  username = '';
+  password = '';
+
+  accedi(): void {
+    console.log('Username:', this.username);
+    console.log('Password inserita:', !!this.password);
+  }
+}

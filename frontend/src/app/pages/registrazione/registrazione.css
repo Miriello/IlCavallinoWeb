@@ -1,0 +1,93 @@
+.registrazione-page {
+    min-height: calc(100vh - 70px);
+    background-color: #f5f5f5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+}
+
+.registrazione-page form {
+    background-color: #111217;
+    color: white;
+
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.registrazione-page h1 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0 0 20px;
+}
+
+.registrazione-page label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.registrazione-page input {
+    background-color: #25262c;
+    color: white;
+
+    padding: 14px;
+    border: 1px solid #444;
+    border-radius: 8px;
+
+    outline: none;
+}
+
+.registrazione-page input:focus {
+    border-color: #198754;
+}
+
+.registrazione-page button {
+    background-color: #198754;
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 14px;
+    margin-top: 12px;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.registrazione-page button:hover {
+    background-color: #157347;
+}
+
+.registrazione-page p {
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 14px;
+    margin: 12px 0 0;
+}
+
+.registrazione-page a {
+    color: #35c987;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.registrazione-page a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .registrazione-page form {
+        padding: 28px 22px;
+    }
+}
