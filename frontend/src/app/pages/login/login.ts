@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AutenticazioneService } from '../../services/autenticazione';
 
 @Component({
@@ -11,6 +11,7 @@ import { AutenticazioneService } from '../../services/autenticazione';
 })
 export class Login {
   private autenticazioneService = inject(AutenticazioneService);
+  private router = inject(Router);
   errore = '';
   username = '';
   password = '';
@@ -24,6 +25,7 @@ export class Login {
         this.autenticazioneService.impostaAutenticazione(risposta);
         console.log('Login riuscito: ', risposta.username);
         console.log('Ruolo: ', risposta.ruolo);
+        this.router.navigate(['/menu']);
       },
       error: () => {
         this.errore='Credenziali non valide';

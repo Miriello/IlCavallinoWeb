@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AutenticazioneService } from '../../services/autenticazione';
 
 @Component({
   imports: [RouterLink,RouterLinkActive],
@@ -7,4 +8,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar-admin.css',
   templateUrl: './navbar-admin.html',
 })
-export class NavbarAdmin {}
+export class NavbarAdmin {
+  private autenticazioneService = inject(AutenticazioneService);
+  private router = inject(Router);
+
+   logout(): void {
+    this.autenticazioneService.logout();
+    this.router.navigate(['/homepage']);
+  }
+}

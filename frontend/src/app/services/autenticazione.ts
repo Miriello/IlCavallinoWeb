@@ -32,4 +32,8 @@ export class AutenticazioneService {
     impostaAutenticazione(risposta: AutenticazioneResponse): void {
         this.utenteSignal.set(risposta);
     }
+
+    logout(): void {
+        this.utenteSignal.set(null);
+    }
 }
