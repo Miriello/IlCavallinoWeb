@@ -13,6 +13,7 @@ export class NavbarUser {
   private router = inject(Router)
 
   logout(): void {
+    localStorage.removeItem('sessione');
     this.autenticazioneService.logout();
     this.router.navigate(['/homepage']);
   }

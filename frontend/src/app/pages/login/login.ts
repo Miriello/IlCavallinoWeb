@@ -29,7 +29,7 @@ export class Login {
           this.router.navigate(['/menu']);
         }
         if(risposta.ruolo == 'ADMIN'){
-          this.router.navigate(['/dashborad']);
+          this.router.navigate(['/dashboard']);
         }
       },
       error: () => {

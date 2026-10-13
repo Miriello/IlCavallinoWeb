@@ -1,4 +1,4 @@
-@if (autenticazioneService.utenteAutenticato(); as utente) {
+@if (autenticazioneService.statoCondiviso(); as utente) {
   @if (utente.ruolo === Ruolo.ADMIN) {
     <app-navbar-admin />
   } @else {
