@@ -13,7 +13,15 @@ export class CarrelloService {
         return this.http.get<Carrello>(this.apiUrl);
     }
 
-    aggiungiAlCarrello(id:number, quantita:number):Observable<Carrello>{
-        return this.http.post<Carrello>(`${this.apiUrl}/${id}`);
+    aggiungiAlCarrello(id: number, quantita: number): Observable<Carrello> {
+    return this.http.post<Carrello>(this.apiUrl, null,{ params: { idProdotto: id, quantita } });
+    }
+
+    svuotaCarrello():Observable<Carrello>{
+        return this.http.delete<Carrello>(`${this.apiUrl}/svuota`);
+    }
+
+    eliminaProdottoDalCarrello(id:number):Observable<Carrello>{
+        return this.http.delete<Carrello>(`${this.apiUrl}/elimina/${id}`);
     }
 }

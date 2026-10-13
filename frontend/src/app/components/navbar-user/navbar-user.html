@@ -1,1 +1,11 @@
-<p>navbar-user works!</p>
+<nav class="nav-bar">
+    <a class="logo" routerLink="/">Il Cavallino</a>
+    <div class="navbar-links">
+        <a routerLink="/" routerLinkActive="active"[routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a routerLink="/menu" routerLinkActive="active">Menu</a>
+        <a routerLink="/login" routerLinkActive="active">Carrello</a>
+        <a class="registrati" routerLink="/registrazione">I miei ordini</a>
+    </div>
+</nav>
+
+

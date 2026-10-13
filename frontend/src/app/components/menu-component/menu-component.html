@@ -1,1 +1,8 @@
-<p>menu-component works!</p>
+<div class="menu-grid">
+    @for (prodotto of prodotti(); track prodotto.id) {
+        <app-prodotto-card
+            [prodotto]="prodotto"
+            (aggiungi)="aggiungiAlCarrello($event)"
+        />
+    }
+</div>

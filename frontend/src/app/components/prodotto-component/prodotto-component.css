@@ -1,0 +1,127 @@
+
+.prodotto-component {
+    background-color: #111217;
+    color: white;
+    border-radius: 18px;
+    padding: 24px;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Nome del prodotto */
+.prodotto-component > strong {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Immagine */
+.immagine-prodotto {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+/* Informazioni */
+.prodotto_info {
+    color: #aaaaaa;
+    line-height: 1.6;
+}
+
+.prodotto_info p {
+    margin: 0 0 12px;
+    font-size: 15px;
+}
+
+.prodotto_info strong {
+    display: block;
+    color: white;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.prodotto-bottoni {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prodotto-bottoni button {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    border: 1px solid #555;
+
+    background-color: #25262c;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.prodotto-bottoni button:hover {
+    background-color: #45464e;
+}
+
+
+.prodotto-bottoni .aggiungi-button {
+    margin-left: auto;
+    margin-right: 0;
+
+    background-color: #198754;
+    border: none;
+    font-size: 24px;
+}
+
+.prodotto-bottoni .aggiungi-button:hover {
+    background-color: #146c43;
+}
+
+
+.allergeni_info,
+.ingredienti_info {
+    color: #dddddd;
+}
+
+.allergeni_info:not(:empty),
+.ingredienti_info:not(:empty) {
+    border-top: 1px solid #33343a;
+    padding-top: 12px;
+}
+
+.allergeni_info h4,
+.ingredienti_info h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.allergeni_info p,
+.ingredienti_info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .prodotto-component {
+        margin: 0;
+        padding: 16px;
+    }
+
+    .immagine-prodotto {
+        height: 190px;
+    }
+}

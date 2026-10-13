@@ -17,4 +17,16 @@ export class OrdineService {
         return this.http.get<Ordine>(`${this.apiUrl}/${id}`);
     }
 
+    getMieiOrdini(): Observable<Ordine[]> {
+        return this.http.get<Ordine[]>(`${this.apiUrl}/miei`);
+    }
+
+    creaOrdine(): Observable<Ordine> {
+        return this.http.post<Ordine>(this.apiUrl, null);
+    }
+
+    eliminaOrdine(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+
 }

@@ -1,1 +1,31 @@
-<p>prodotto-component works!</p>
+<div class="prodotto-component">
+    <strong>{{prodotto().nome}}</strong>
+    <img class="immagine-prodotto" [src] = "prodotto().urlImg">
+    <div class="prodotto_info">
+        <p>{{prodotto().descrizione}}</p>
+        <strong>{{prodotto().prezzo}}</strong>
+        <div class="prodotto-bottoni">
+            <button type="button" (click)="mostraAllergeniFunc()">A</button>
+            <button type="button" (click)="mostraIngredientiFunc()">I</button>
+            <button (click)="aggiungiAlCarrello()" aria-label="+">+</button>
+        </div>
+    </div>
+    <div class="allergeni_info">
+        @if(mostraAllergeni){
+            <h4>Allergeni: </h4>
+            @for(ingrediente of prodotto().ingredienti; track ingrediente.id){
+                @for(allergene of ingrediente.allergeni; track allergene.id){
+                    <p>{{allergene.nome}}</p>
+            }
+        }
+    }
+    </div>
+    <div class="ingredienti_info">
+        @if(mostraIngredienti){
+            <h4>Ingredienti: </h4>
+            @for(ingrediente of prodotto().ingredienti; track ingrediente.id){
+                <p>{{ingrediente.nome}}</p>
+            }
+        }
+    </div>
+</div>

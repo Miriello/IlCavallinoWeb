@@ -1,9 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { Prodotto } from '../../models/prodotto';
 
 @Component({
-  imports: [],
   selector: 'app-prodotto-component',
-  styleUrl: './prodotto-component.css',
+  imports: [],
   templateUrl: './prodotto-component.html',
+  styleUrl: './prodotto-component.css'
 })
-export class ProdottoComponent {}
+export class ProdottoComponent {
+
+  prodotto = input.required<Prodotto>();
+  aggiungi = output<number>();
+
+  mostraAllergeni = false;
+  mostraIngredienti=false;
+
+  mostraAllergeniFunc(){
+    this.mostraAllergeni=!this.mostraAllergeni;
+    this.mostraIngredienti= false;
+  }
+
+  mostraIngredientiFunc(){
+    this.mostraIngredienti= !this.mostraIngredienti
+    this.mostraAllergeni= false;
+  }
+
+
+  aggiungiAlCarrello(): void {
+    this.aggiungi.emit(this.prodotto().id);
+  }
+}

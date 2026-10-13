@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { Prodotto } from '../../models/prodotto';
+import { ProdottoComponent } from '../prodotto-component/prodotto-component';
 
 @Component({
-  imports: [],
   selector: 'app-menu-component',
-  styleUrl: './menu-component.css',
+  imports: [ProdottoComponent],
   templateUrl: './menu-component.html',
+  styleUrl: './menu-component.css'
 })
-export class MenuComponent {}
+export class MenuComponent {
+
+  prodotti = input.required<Prodotto[]>();
+
+  aggiungi = output<number>();
+
+  aggiungiAlCarrello(idProdotto: number): void {
+    this.aggiungi.emit(idProdotto);
+  }
+}
