@@ -1,3 +1,20 @@
+<div class="menu-tabs">
+
+    <button
+        [class.active]="categoriaSelezionata() === null"
+        (click)="selezionaCategoria(null)">
+        Tutti
+    </button>
+
+    @for (categoria of categorie; track categoria) {
+        <button
+            [class.active]="categoriaSelezionata() === categoria"
+            (click)="selezionaCategoria(categoria)">
+            {{ categoria }}
+        </button>
+    }
+
+</div>
 <div class="menu-grid">
     @for (prodotto of prodotti(); track prodotto.id) {
         <app-prodotto-component

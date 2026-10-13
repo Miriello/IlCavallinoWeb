@@ -1,1 +1,7 @@
-<p>menu works!</p>
+<section class="pagina-menu">
+    <h1>Il nostro Menu</h1>
+        <app-menu-component
+            [prodotti]="prodotti()"
+            (aggiungi)="aggiungiAlCarrello($event)"
+        />
+</section>

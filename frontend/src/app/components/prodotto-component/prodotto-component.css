@@ -4,26 +4,19 @@
     color: white;
     border-radius: 18px;
     padding: 24px;
-    margin: 10px;
-
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     width: 100%;
-    max-width: 400px;
     box-sizing: border-box;
-
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Nome del prodotto */
 .prodotto-component > strong {
     font-size: 24px;
     font-weight: bold;
 }
 
-/* Immagine */
 .immagine-prodotto {
     width: 100%;
     height: 230px;
@@ -31,7 +24,6 @@
     border-radius: 14px;
 }
 
-/* Informazioni */
 .prodotto_info {
     color: #aaaaaa;
     line-height: 1.6;

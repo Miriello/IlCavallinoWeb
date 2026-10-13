@@ -3,11 +3,11 @@
     <img class="immagine-prodotto" [src] = "prodotto().urlImg">
     <div class="prodotto_info">
         <p>{{prodotto().descrizione}}</p>
-        <strong>{{prodotto().prezzo}}</strong>
+        <strong>{{prodotto().prezzo | currency:'EUR' }}</strong>
         <div class="prodotto-bottoni">
             <button type="button" (click)="mostraAllergeniFunc()">A</button>
             <button type="button" (click)="mostraIngredientiFunc()">I</button>
-            <button (click)="aggiungiAlCarrello()" aria-label="+">+</button>
+            <button class = "aggiungi-button" (click)="aggiungiAlCarrello()" aria-label="Aggiungi al carrello">+</button>
         </div>
     </div>
     <div class="allergeni_info">
