@@ -1,12 +1,13 @@
 <section class="login-page">
-  <form>
+  <form (ngSubmit)="accedi()">
     <h1>Accedi</h1>
-    
+
     <label for="username">Username</label>
     <input
       id="username"
       type="text"
       name="username"
+      [(ngModel)]="username"
       required
     >
 
@@ -15,11 +16,16 @@
       id="password"
       type="password"
       name="password"
+      [(ngModel)]="password"
       required
     >
 
     <button type="submit">Accedi</button>
-    @if (errore) {<p class="errore">{{ errore }}</p>}
+
+    @if (errore) {
+      <p class="errore">{{ errore }}</p>
+    }
+
     <p>
       Non hai un account?
       <a routerLink="/registrazione">Registrati</a>

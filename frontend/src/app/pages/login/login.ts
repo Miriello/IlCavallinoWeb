@@ -10,17 +10,18 @@ import { AutenticazioneService } from '../../services/autenticazione';
   styleUrl: './login.css'
 })
 export class Login {
-  private AutenticazioneService = inject(AutenticazioneService);
+  private autenticazioneService = inject(AutenticazioneService);
   errore = '';
   username = '';
   password = '';
 
   accedi(): void {
-    this.AutenticazioneService.login({
+    this.autenticazioneService.login({
       username : this.username,
       password : this.password
     }).subscribe({
       next:(risposta) => {
+        this.autenticazioneService.impostaAutenticazione(risposta);
         console.log('Login riuscito: ', risposta.username);
         console.log('Ruolo: ', risposta.ruolo);
       },

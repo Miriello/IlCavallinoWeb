@@ -1,2 +1,11 @@
-<app-navbar-pubblica />
+@if (autenticazioneService.utenteAutenticato(); as utente) {
+  @if (utente.ruolo === Ruolo.ADMIN) {
+    <app-navbar-admin />
+  } @else {
+    <app-navbar-user />
+  }
+} @else {
+  <app-navbar-pubblica />
+}
+
 <router-outlet />

@@ -10,7 +10,7 @@ import { AutenticazioneService } from '../../services/autenticazione';
   styleUrl: './registrazione.css'
 })
 export class Registrazione {
-  private AutenticazioneService = inject(AutenticazioneService);
+  private autenticazioneService = inject(AutenticazioneService);
   username = '';
   email = '';
   password = '';
@@ -18,11 +18,12 @@ export class Registrazione {
   errore='';
 
   registrati(): void {
-    this.AutenticazioneService.registrazione({
+    this.autenticazioneService.registrazione({
       username:this.username,
       password: this.password,
       email: this.email}).subscribe({
         next: (risposta) => {
+          this.autenticazioneService.impostaAutenticazione(risposta);
           this.messaggio='Registrazione completata, benvenuto' +risposta.username;
         },
         error:()=>{

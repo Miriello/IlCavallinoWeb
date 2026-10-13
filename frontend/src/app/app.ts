@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import { AutenticazioneService } from './services/autenticazione';
+import { Ruolo } from './models/autenticazioneResponse';
+
 import { NavbarPubblica } from './components/navbar-pubblica/navbar-pubblica';
+import { NavbarUser } from './components/navbar-user/navbar-user';
+import { NavbarAdmin } from './components/navbar-admin/navbar-admin';
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, NavbarPubblica],
-    templateUrl: './app.html',
-    styleUrl: './app.css'
+  selector: 'app-root',
+  imports: [
+    RouterOutlet,
+    NavbarPubblica,
+    NavbarUser,
+    NavbarAdmin
+  ],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class App {}
+export class App {
+  readonly autenticazioneService = inject(AutenticazioneService);
+  readonly Ruolo = Ruolo;
+}
