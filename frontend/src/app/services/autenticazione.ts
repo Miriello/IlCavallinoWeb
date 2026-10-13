@@ -45,6 +45,7 @@ export class AutenticazioneService {
     }
 
     logout(): void {
+        localStorage.removeItem('sessione');
         this.rispostaCondivisa.set(null);
         this.scadenzaToken=0;
     }
