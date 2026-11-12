@@ -29,7 +29,7 @@
     background-color: var(--rosso);
     border-color: #198754;
 }
-.menu-grid {
+.menu-griglia {
     display: grid;
 
     grid-template-columns: repeat(3, minmax(0, 1fr));

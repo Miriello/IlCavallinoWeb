@@ -3,11 +3,11 @@ package com.example.ilcavallinobackend.model.dto;
 import java.util.List;
 
 public class CarrelloDTO {
-    private long id;
+    private Long id;
     private String username;
     private List<RigaCarrelloDTO> elenco;
 
-    public CarrelloDTO(long id, String username, List<RigaCarrelloDTO> elenco){
+    public CarrelloDTO(Long id, String username, List<RigaCarrelloDTO> elenco){
         this.id=id;
         this.username=username;
         this.elenco=elenco;
@@ -17,7 +17,7 @@ public class CarrelloDTO {
 
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
@@ -29,7 +29,7 @@ public class CarrelloDTO {
         return elenco;
     }
 
-    public void setId(long id){
+    public void setId(Long id){
         this.id=id;
     }
 

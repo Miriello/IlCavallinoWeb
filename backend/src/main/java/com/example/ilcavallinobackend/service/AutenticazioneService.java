@@ -53,6 +53,7 @@ public class AutenticazioneService {
         Utente utente = utenteRepository.findByUsername(request.getUsername()).orElseThrow();
 
         String token = jwtService.generaToken(claimsConRuolo(utente), utente);
+        System.out.println("JWT valido: " + jwtService.isTokenValid(token, utente));
 
         return new AutenticazioneResponse(token, utente.getUsername(), utente.getRuolo(), jwtExpirationMs);
     }

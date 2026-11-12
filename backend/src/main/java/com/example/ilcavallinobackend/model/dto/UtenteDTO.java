@@ -5,7 +5,7 @@ import com.example.ilcavallinobackend.model.entity.Ruolo;
 
 public class UtenteDTO {
 
-    private long id;
+    private Long id;
     private String username;
     private String email;
     private String password;

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,input } from '@angular/core';
+import { Ordine } from '../../models/ordine';
 
 @Component({
   imports: [],
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './ordini-component.css',
   templateUrl: './ordini-component.html',
 })
-export class OrdiniComponent {}
+export class OrdiniComponent {
+  ordini = input.required<Ordine[]>();
+
+}

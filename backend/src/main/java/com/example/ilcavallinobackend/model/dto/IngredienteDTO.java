@@ -7,7 +7,7 @@ import java.util.List;
 
 public class IngredienteDTO {
 
-    private long id;
+    private Long id;
     @NotBlank
     private String nome;
     private LocalDate scadenza;
@@ -16,18 +16,18 @@ public class IngredienteDTO {
     public IngredienteDTO(){
 
     }
-    public IngredienteDTO(long id, String nome, LocalDate scadenza, List<AllergeneDTO> allergeni){
+    public IngredienteDTO(Long id, String nome, LocalDate scadenza, List<AllergeneDTO> allergeni){
         this.id=id;
         this.nome=nome;
         this.scadenza=scadenza;
         this.allergeni=allergeni;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

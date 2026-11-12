@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Prodotto } from '../../models/prodotto';
 import { ProdottoService } from '../../services/prodotto';
+import { CarrelloService } from '../../services/carrello';
 import { MenuComponent } from '../../components/menu-component/menu-component';
 
 @Component({
@@ -12,6 +13,7 @@ import { MenuComponent } from '../../components/menu-component/menu-component';
 export class Menu implements OnInit {
 
   private prodottoService = inject(ProdottoService);
+  private carrelloService = inject(CarrelloService);
 
   prodotti = signal<Prodotto[]>([]);
   caricamento = signal(true);
@@ -33,37 +35,8 @@ ngOnInit(): void {
 }
 
   aggiungiAlCarrello(idProdotto: number): void {
-    console.log('Prodotto selezionato:', idProdotto);
+    this.carrelloService.aggiungiAlCarrello(idProdotto,1).subscribe();
   }
 
-  /*prodotti = signal<Prodotto[]>([
-  {
-    id: 1,
-    nome: 'Pizza Margherita',
-    categoriaProdotto: CategoriaProdotto.ROSTICCERIA,
-    descrizione: 'Pomodoro, mozzarella e basilico',
-    prezzo: 7.00,
-    ingredienti: [],
-    urlImg: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002'
-  },
-  {
-    id: 2,
-    nome: 'Pizza Diavola',
-    categoriaProdotto: CategoriaProdotto.ROSTICCERIA,
-    descrizione: 'Pomodoro, mozzarella e salame piccante',
-    prezzo: 9.00,
-    ingredienti: [],
-    urlImg: 'https://images.unsplash.com/photo-1513104890138-7c749659a591'
-  },
-  {
-    id: 3,
-    nome: 'Pizza Diavola',
-    categoriaProdotto: CategoriaProdotto.ROSTICCERIA,
-    descrizione: 'Pomodoro, mozzarella e salame piccante',
-    prezzo: 9.00,
-    ingredienti: [],
-    urlImg: 'https://images.unsplash.com/photo-1513104890138-7c749659a591'
-  }
-]);
-*/
+  
 }

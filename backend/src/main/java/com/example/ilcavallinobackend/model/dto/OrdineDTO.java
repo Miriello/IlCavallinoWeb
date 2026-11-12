@@ -1,11 +1,9 @@
 package com.example.ilcavallinobackend.model.dto;
 
-import com.example.ilcavallinobackend.model.entity.Carrello;
-
 import java.time.LocalDate;
 public class OrdineDTO {
 
-    private long id;
+    private Long id;
     private String username;
     private LocalDate data;
     private CarrelloDTO carrelloDTO;
@@ -45,11 +43,11 @@ public class OrdineDTO {
         this.data = data;
     }
 
-    public CarrelloDTO getCarrello() {
+    public CarrelloDTO getCarrelloDTO() {
         return carrelloDTO;
     }
 
-    public void setCarrello (CarrelloDTO carrelloDTO) {
+    public void setCarrelloDTO(CarrelloDTO carrelloDTO) {
         this.carrelloDTO = carrelloDTO;
     }
 }

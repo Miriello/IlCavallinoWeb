@@ -9,7 +9,7 @@ public class OrdineMapper {
         ordineDTO.setId(ordine.getId());
         ordineDTO.setUsername(ordine.getUtente().getUsername());
         ordineDTO.setData(ordine.getData());
-        ordineDTO.setCarrello(CarrelloMapper.toDTO(ordine.getCarrello()));
+        ordineDTO.setCarrelloDTO(CarrelloMapper.toDTO(ordine.getCarrello()));
         return ordineDTO;
     }
 }

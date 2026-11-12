@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class AllergeneDTO {
 
-    private long id;
+    private Long id;
     @NotBlank
     private String nome;
 
@@ -12,12 +12,12 @@ public class AllergeneDTO {
 
     }
 
-    public AllergeneDTO(long id, String nome){
+    public AllergeneDTO(Long id, String nome){
         this.id=id;
         this.nome=nome;
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
@@ -25,7 +25,7 @@ public class AllergeneDTO {
         return nome;
     }
 
-    public void setId(long id){
+    public void setId(Long id){
         this.id=id;
     }
 

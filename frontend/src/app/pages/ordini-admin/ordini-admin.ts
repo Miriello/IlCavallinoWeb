@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { GestioneOrdini } from '../../components/gestione-ordini/gestione-ordini';
 
 @Component({
-  imports: [],
+  imports: [GestioneOrdini],
   selector: 'app-ordini-admin',
   styleUrl: './ordini-admin.css',
   templateUrl: './ordini-admin.html',

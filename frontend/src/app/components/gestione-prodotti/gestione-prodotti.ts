@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ProdottoService } from '../../services/prodotto';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './gestione-prodotti.css',
   templateUrl: './gestione-prodotti.html',
 })
-export class GestioneProdotti {}
+export class GestioneProdotti {
+  private readonly prodottiService = inject(ProdottoService);
+}

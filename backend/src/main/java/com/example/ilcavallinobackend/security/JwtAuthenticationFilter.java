@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -36,8 +37,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         final String jwt = header.substring(7);
+        System.out.println("JWT RICEVUTO: " + jwt.equals("TOKEN_DI_TEST"));
         try {
             final String username = jwtService.estraiUsername(jwt);
+            System.out.println("USERNAME DAL JWT: " + username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (jwtService.isTokenValid(jwt, userDetails)) {
@@ -48,7 +51,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         }
-        catch (JwtException ex){
+        catch (JwtException | IllegalArgumentException | UsernameNotFoundException ex) {
+            System.err.println("ERRORE JWT: " + ex.getMessage());
             SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);

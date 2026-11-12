@@ -1,1 +1,7 @@
-<p>ordini-component works!</p>
+<div class="griglia-ordini">
+    @for (ordine of ordini(); track ordine.id) {
+        <app-ordini-component
+            [ordini]="ordine"
+        />
+    }
+</div>

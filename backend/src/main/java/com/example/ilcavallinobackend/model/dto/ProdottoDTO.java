@@ -9,19 +9,19 @@ import java.util.List;
 
 public class ProdottoDTO {
 
-    private long id;
+    private Long id;
     @NotBlank
     private String nome;
     @NotNull
     private CategoriaProdotto categoriaProdotto;
     private String descrizione;
-    @DecimalMin("0,01")
+    @DecimalMin("0.01")
     private double prezzo;
     private List<IngredienteDTO> ingredienti;
     private String urlImg;
 
 
-    public ProdottoDTO(long id, String nome, CategoriaProdotto categoriaProdotto, String descrizione, double prezzo, List<IngredienteDTO> ingredienti, String urlImg){
+    public ProdottoDTO(Long id, String nome, CategoriaProdotto categoriaProdotto, String descrizione, double prezzo, List<IngredienteDTO> ingredienti, String urlImg){
         this.id=id;
         this.nome=nome;
         this.categoriaProdotto=categoriaProdotto;
@@ -35,7 +35,7 @@ public class ProdottoDTO {
 
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
@@ -63,7 +63,7 @@ public class ProdottoDTO {
         return urlImg;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
