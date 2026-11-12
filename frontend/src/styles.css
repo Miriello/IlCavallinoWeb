@@ -2,7 +2,6 @@
 :root{
   --font_principale:Arial;
 
-
   --colore_primario: red;
   --colore_secondario: red;
   --colore_terziario: red;
@@ -19,14 +18,9 @@
   --colore_superficie_righe:white;
   --colore_tabs:grey;
 
-  --spaziatura_interna_card:10px;
-  --spaziatura_interna_riga:10px;
-  --spaziatura_interna_form:10px;
-
-
-  --raggio_card: 20radius;
-  --raggio_riga: 20;
-  --raggio_bottone:20rad;
+  --raggio_card: 20px;
+  --raggio_riga: 20px;
+  --raggio_bottone:20px;
 
   --durata_transizioni:20ms;
 
@@ -35,14 +29,15 @@
   --opacita_form:0.9;
   --opacita_navbar:1.0;
 
-  --dimensione_max_pagina:200;
+  --dimensione_max_pagina:1100px;
   --dimensione_icona_bottone:30px;
-  --distanza_dei_contenuti_dal_bordo:100;
+  --dimensione_bottone:40px;
+  --distanza_dei_contenuti_dal_bordo:10px;
   --dimensione_immagine_info:200px;
   --dimensione_immagine_illustrativa:500px;
 
-  --dimensione_font_titolo:20;
-  --dimensione_font_titoli_card:15;
+  --dimensione_font_titolo:20px;
+  --dimensione_font_titoli_card:15px;
   --dimensione_prezzo_card:10px;
   --dimensione_prezzo_riga:8px; 
   --dimensione_font_elementi_navbar:10px;
@@ -53,5 +48,13 @@
   --padding_card:10px;
   --padding_riga:10px;
   --padding_form:10px;
+  --padding_bottone:10px;
+
+  --distanza_tra_elementi:12px;
+  --distanza_tra_sezioni:10px;
+
+  --spessore_bordo:1px;
+  --stile_bordo:solid;
+
 
 }
