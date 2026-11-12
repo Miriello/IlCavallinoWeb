@@ -3,6 +3,9 @@ import { Prodotto } from '../../models/prodotto';
 import { ProdottoService } from '../../services/prodotto';
 import { CarrelloService } from '../../services/carrello';
 import { MenuComponent } from '../../components/menu-component/menu-component';
+import { AutenticazioneService } from '../../services/autenticazione';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +14,10 @@ import { MenuComponent } from '../../components/menu-component/menu-component';
   styleUrl: './menu.css'
 })
 export class Menu implements OnInit {
-
+  private autenticazioneService = inject(AutenticazioneService);
   private prodottoService = inject(ProdottoService);
   private carrelloService = inject(CarrelloService);
+  private router = inject(Router);
 
   prodotti = signal<Prodotto[]>([]);
   caricamento = signal(true);
@@ -35,7 +39,16 @@ ngOnInit(): void {
 }
 
   aggiungiAlCarrello(idProdotto: number): void {
-    this.carrelloService.aggiungiAlCarrello(idProdotto,1).subscribe();
+    if(!this.autenticazioneService.tokenValido()){
+      this.router.navigate(['/login']);
+    } 
+    if (this.autenticazioneService.statoCondiviso()?.ruolo == 'ADMIN') {
+      this.router.navigate(['/dashboard']);
+    }
+    this.carrelloService.aggiungiAlCarrello(idProdotto,1).subscribe({
+      next: () => console.log('Prodotto aggiunto al carrello'),
+      error: () => console.log("Errore nell'aggiunta del prodotto al carrello");
+    });
   }
 
   
