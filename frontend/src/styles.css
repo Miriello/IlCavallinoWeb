@@ -1,39 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap');
+/* Definizione dello stile globale da usare nella web app */
+:root{
+  --font_principale:Arial;
 
-:root {
-  --rosso: #f00000;
-  --rosso-hover: #cf0000;
 
-  --bianco: #ffffff;
-  --sfondo: #f6f6f6;
-  --testo: #171717;
-  --testo-secondario: #666666;
-  --bordo: #e8e8e8;
+  --colore_primario: red;
+  --colore_secondario: red;
+  --colore_terziario: red;
+  --colore_evidenziazione: grey;
+  --colore_sfondo: white;
+  --colore_testo: black;
+  --colore_bordi: black;
+  --colore_messaggio_ok: green;
+  --colore_messaggio_errore: red;
+  --colore_pulsante_info: grey;
+  --colore_pulsante_aggiunta:green;
+  --colore_pulsante_rimozione:red;
+  --colore_superficie_card:white;
+  --colore_superficie_righe:white;
+  --colore_tabs:grey;
 
-  --raggio: 10px;
-  --ombra: 0 4px 16px rgba(0, 0, 0, 0.07);
+  --spaziatura_interna_card:10px;
+  --spaziatura_interna_riga:10px;
+  --spaziatura_interna_form:10px;
 
-  --font-principale: 'Roboto', Arial, sans-serif;
-}
 
-* {
-  box-sizing: border-box;
-}
+  --raggio_card: 20radius;
+  --raggio_riga: 20;
+  --raggio_bottone:20rad;
 
-body {
-  margin: 0;
-  font-family: var(--font-principale);
-  background: var(--sfondo);
-  color: var(--testo);
-}
+  --durata_transizioni:20ms;
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
+  --opacita_card:0.9;
+  --opacita_riga:0.9;
+  --opacita_form:0.9;
+  --opacita_navbar:1.0;
 
-button {
-  cursor: pointer;
+  --dimensione_max_pagina:200;
+  --dimensione_icona_bottone:30px;
+  --distanza_dei_contenuti_dal_bordo:100;
+  --dimensione_immagine_info:200px;
+  --dimensione_immagine_illustrativa:500px;
+
+  --dimensione_font_titolo:20;
+  --dimensione_font_titoli_card:15;
+  --dimensione_prezzo_card:10px;
+  --dimensione_prezzo_riga:8px; 
+  --dimensione_font_elementi_navbar:10px;
+  --dimensione_font_descrizione:12px;
+  --dimensione_font_categorie:8px;
+  --dimensione_font_bottoni:5px;
+
+  --padding_card:10px;
+  --padding_riga:10px;
+  --padding_form:10px;
+
 }
